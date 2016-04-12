@@ -1,0 +1,279 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<Application xmlns='http://schemas.microsoft.com/windows/2009/Ribbon'>
+  <Application.Commands>
+
+    <Command Name="cmdButtonBoardVerCheck"
+             Id="2001"
+             LabelTitle="校验版本号"
+             LabelDescription="校验待测板卡的版本号"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonSetCom"
+             Id="2002"
+             LabelTitle="波特率设置"
+             LabelDescription="设置待测串口的波特率"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonSetMac"
+             Id="2003"
+             LabelTitle="MAC设置"
+             LabelDescription="设置待测网口的波特率"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonExit"
+             Id="2099"
+             LabelTitle="Exit"
+             LabelDescription="Exit Description"
+             TooltipTitle="Exit (Ctrl+X)"
+             TooltipDescription="Exit application.">
+      <Command.LargeImages>
+        <Image>Resources/Exit32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonFuncStart"
+             Id="2101"
+             LabelTitle="Start"
+             LabelDescription="开始功能测试"
+             TooltipTitle="开始功能测试"
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonFuncEnd"
+             Id="2102"
+             LabelTitle="Stop"
+             LabelDescription="结束功能测试"
+             TooltipTitle="结束功能测试"
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonOlderStart"
+             Id="2103"
+             LabelTitle="开始"
+             LabelDescription="开始老化测试"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonOlderEnd"
+             Id="2104"
+             LabelTitle="结束"
+             LabelDescription="结束老化测试"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonHaltStart"
+             Id="2105"
+             LabelTitle="开始"
+             LabelDescription="开始HALT测试"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonHaltEnd"
+             Id="2106"
+             LabelTitle="结束"
+             LabelDescription="结束HALT测试"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonSetCustom"
+             Id="2201"
+             LabelTitle="设定用例"
+             LabelDescription="设定自定义测试用例"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonCustomStart"
+             Id="2202"
+             LabelTitle="开始测试"
+             LabelDescription="开始自定义测试"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonCustomEnd"
+             Id="2203"
+             LabelTitle="结束测试"
+             LabelDescription="结束自定义测试"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonExportXls"
+             Id="2301"
+             LabelTitle="Excel"
+             LabelDescription="导出到Excel"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdButtonExportPdf"
+             Id="2302"
+             LabelTitle="PDF"
+             LabelDescription="导出到PDF"
+             TooltipTitle=""
+             TooltipDescription="">
+      <Command.LargeImages>
+        <Image>Resources/New32.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="cmdTabMain"
+             Id="1011"
+             LabelTitle="开始">
+    </Command>
+
+    <Command Name="cmdTabBasicMain"
+             Id="1012"
+             LabelTitle="基本测试">
+    </Command>
+
+    <Command Name="cmdTabCustomMain"
+             Id="1013"
+             LabelTitle="高级">
+    </Command>
+
+    <Command Name="cmdTabReportMain"
+             Id="1014"
+             LabelTitle="报告">
+    </Command>
+
+    <Command Name="cmdGroupCheck"
+         Id="1021"
+         LabelTitle="校验">
+    </Command>
+
+    <Command Name="cmdGroupConfig"
+         Id="1022"
+         LabelTitle="设置">
+    </Command>
+
+    <Command Name="cmdGroupExit"
+         Id="1023"
+         LabelTitle="">
+    </Command>
+
+    <Command Name="cmdGroupFunc"
+         Id="1031"
+         LabelTitle="功能测试">
+    </Command>
+
+    <Command Name="cmdGroupOlder"
+         Id="1032"
+         LabelTitle="老化测试">
+    </Command>
+
+    <Command Name="cmdGroupHALT"
+         Id="1033"
+         LabelTitle="Halt测试">
+    </Command>
+
+    <Command Name="cmdGroupCustom"
+         Id="1041"
+         LabelTitle="高级测试">
+    </Command>
+
+    <Command Name="cmdGroupReport"
+         Id="1051"
+         LabelTitle="导出">
+    </Command>
+  </Application.Commands>
+
+  <Application.Views>
+    <Ribbon>
+      <Ribbon.HelpButton>
+        <HelpButton CommandName="cmdHelpButton" />
+      </Ribbon.HelpButton>
+      <Ribbon.Tabs>
+        <Tab CommandName="cmdTabMain">
+          <Group CommandName="cmdGroupCheck" SizeDefinition="OneButton">
+            <Button CommandName="cmdButtonBoardVerCheck" />
+          </Group>
+          <Group CommandName="cmdGroupConfig" SizeDefinition="TwoButtons">
+            <Button CommandName="cmdButtonSetCom" />
+            <Button CommandName="cmdButtonSetMac" />
+          </Group>
+          <Group CommandName="cmdGroupExit" SizeDefinition="OneButton">
+            <Button CommandName="cmdButtonExit" />
+          </Group>
+        </Tab>
+        <Tab CommandName ="cmdTabBasicMain">
+          <Group CommandName="cmdGroupFunc" SizeDefinition="TwoButtons">
+            <Button CommandName="cmdButtonFuncStart" />
+            <Button CommandName="cmdButtonFuncEnd" />
+          </Group>
+          <Group CommandName="cmdGroupOlder" SizeDefinition="TwoButtons">
+            <Button CommandName="cmdButtonOlderStart" />
+            <Button CommandName="cmdButtonOlderEnd" />
+          </Group>
+          <Group CommandName="cmdGroupHALT" SizeDefinition="TwoButtons">
+            <Button CommandName="cmdButtonHaltStart" />
+            <Button CommandName="cmdButtonHaltEnd" />
+          </Group>
+        </Tab>
+        <Tab CommandName ="cmdTabCustomMain">
+          <Group CommandName="cmdGroupCustom" SizeDefinition="ThreeButtons">
+            <Button CommandName="cmdButtonSetCustom" />
+            <Button CommandName="cmdButtonCustomStart" />
+            <Button CommandName="cmdButtonCustomEnd" />
+          </Group>
+        </Tab>
+        <Tab CommandName ="cmdTabReportMain">
+          <Group CommandName="cmdGroupReport" SizeDefinition="TwoButtons">
+            <Button CommandName="cmdButtonExportXls" />
+            <Button CommandName="cmdButtonExportPdf" />
+          </Group>
+        </Tab>
+      </Ribbon.Tabs>
+    </Ribbon>
+  </Application.Views>
+</Application>

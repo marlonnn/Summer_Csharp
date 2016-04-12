@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<objects xmlns="http://www.springframework.net">
+  
+  <object id="latch" type="Summer.System.Threading.Latch, Summer.System">
+  </object>
+
+  <object id="ipClients" type="HW.HTUP.Threading.IpClients,HW.HTUP">
+    <property name="ListenPort" value="11000"/>
+    <property name="Clients">
+      <list element-type="string">
+        <value>127.0.0.1:11000</value>
+        <value>127.0.0.1:9999</value>
+      </list>
+    </property>
+  </object>
+
+  <object id="rxQueue" type="HW.HTUP.Threading.RxQueue,HW.HTUP">
+  </object>
+
+  <object id="txQueue" type="HW.HTUP.Threading.TxQueue,HW.HTUP">
+  </object>
+
+  <object id="frameProtocol" type="HW.HTUP.Threading.FrameProtocol,HW.HTUP">
+    <property name="AppMark" value="0x55"/>
+  </object>
+
+  <object id="rxBaseProtocol" type="HW.HTUP.Threading.RxBaseV1Protocol,HW.HTUP">
+    <property name="rxQueue" ref="rxQueue"/>
+  </object>
+
+  <object id="txBaseProtocol" type="HW.HTUP.Threading.TxBaseV1Protocol,HW.HTUP">
+    <property name="txQueue" ref="txQueue"/>
+  </object>
+
+  <object id="processManager" type="HW.HTUP.Threading.ProcessManager,HW.HTUP">
+    <property name="latch" ref="latch"/>
+    <property name="txQueue" ref="txQueue"/>
+    <property name="socketThreads" ref="socketThreads"/>
+    <property name="rxProcess" ref="rxProcess"/>
+    <property name="ipClients" ref="ipClients"/>
+  </object>
+
+  <object id="socketThreads" type="HW.HTUP.Threading.SocketThreads,HW.HTUP">
+    <property name="latch" ref="latch"/>
+    <property name="ipClients" ref="ipClients"/>
+    <property name="txQueue" ref="txQueue"/>
+    <property name="frameProtocol" ref="frameProtocol"/>
+    <property name="rxBaseProtocol" ref="rxBaseProtocol"/>
+  </object>
+
+  <object id="rxProcess" type="HW.HTUP.Threading.RxProcess,HW.HTUP">
+    <property name="latch" ref="latch"/>
+    <property name="rxQueue" ref="rxQueue"/>
+    <property name="observers">
+      <list element-type="HW.HTUP.Model.IObserveRxMessage">
+      </list>
+    </property>
+  </object>
+  
+</objects>
