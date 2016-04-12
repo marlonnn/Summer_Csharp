@@ -45,6 +45,18 @@
     <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="iTextAsian, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\iTextAsian.dll</HintPath>
+    </Reference>
+    <Reference Include="iTextAsianCmaps, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\iTextAsianCmaps.dll</HintPath>
+    </Reference>
+    <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\iTextSharp.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\log4net.dll</HintPath>
@@ -104,6 +116,7 @@
     <Compile Include="IO\ExcelReaderHelper.cs" />
     <Compile Include="IO\ExcelWriterHelper.cs" />
     <Compile Include="IO\IniFileHelper.cs" />
+    <Compile Include="IO\PDFHelper.cs" />
     <Compile Include="IO\XmlFileHelper.cs" />
     <Compile Include="Log\LogHelper.cs">
       <SubType>Code</SubType>
@@ -137,6 +150,7 @@
     <Compile Include="Threading\Latch.cs" />
     <Compile Include="Util\ConvertHelper.cs" />
     <Compile Include="Util\ExceptionHelper.cs" />
+    <Compile Include="Util\Fonts.cs" />
     <Compile Include="Util\Matcher.cs" />
     <Compile Include="Util\MathHelper.cs" />
     <Compile Include="Util\NetSetAnyIpep.cs" />
@@ -202,6 +216,9 @@
     <Content Include="Lib\C5.dll" />
     <Content Include="Lib\Common.Logging.dll" />
     <Content Include="Lib\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="Lib\iTextAsian.dll" />
+    <Content Include="Lib\iTextAsianCmaps.dll" />
+    <Content Include="Lib\iTextSharp.dll" />
     <Content Include="Lib\log4net.dll" />
     <Content Include="Lib\log4net.xml" />
     <Content Include="Lib\NPOI.dll" />
