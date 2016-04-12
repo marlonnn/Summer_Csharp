@@ -22,9 +22,42 @@ namespace Summer.System.IO
         private PdfWriter pdfWriter;
         private PdfContentByte canvas;
 
-        public Document Document { get; set; }
+        public Document Document
+        {
+            get
+            {
+                return this.document;
+            }
+            set
+            {
+                this.document = value;
+            }
+        }
 
-        public PdfWriter PdfWriter { get; set;}
+        public PdfWriter PdfWriter
+        {
+            get
+            {
+                return this.pdfWriter;
+            }
+            set
+            {
+                this.pdfWriter = value;
+            }
+        }
+
+        public PdfContentByte Canvas
+        {
+            get
+            {
+                return this.canvas;
+            }
+            private set
+            {
+                this.canvas = value;
+            }
+        }
+
 
         /// <summary>
         /// 构造函数，创建document、pdfWriter、canvas对象
@@ -74,6 +107,7 @@ namespace Summer.System.IO
         /// 使用PdfContentByte和直线构建矩形
         /// 这种方式是利用直线来构建，
         /// 4（x,y+height）<------------3(x+width,y+height)
+        ///  |                          ^
         ///  |                          |
         ///  |                          |
         ///  |                          |
@@ -93,6 +127,16 @@ namespace Summer.System.IO
             pdfContentByte.LineTo(offsetLeft, offsetBottom + height);
             pdfContentByte.ClosePath();
             pdfContentByte.Stroke();
+        }
+
+        /// <summary>
+        /// 使用PdfContentByte和Rectangle构建
+        /// </summary>
+        /// <param name="pdfContentByte"></param>
+        /// <param name="rectangle"></param>
+        public void DrawRectangle(PdfContentByte pdfContentByte, Rectangle rectangle)
+        {
+            DrawRectangle(pdfContentByte, rectangle.Left, rectangle.Bottom, rectangle.Right, rectangle.Top);
         }
 
         /// <summary>
@@ -136,6 +180,71 @@ namespace Summer.System.IO
             pdfContentByte.MoveTo(startOffsetLeft, startOffsetBottom);
             pdfContentByte.LineTo(stopOffsetLeft, stopOffsetBottom);
             pdfContentByte.Stroke();
+        }
+
+        /// <summary>
+        /// 通过BaseFont类的实例计算字符的长度（pt）
+        /// iText中默认的字体为Helvetica，字体大小12pt
+        /// 1inch = 25.4mm = 72 user units ≈ 72pt
+        /// </summary>
+        /// <param name="baseFont">BaseFont类的实例</param>
+        /// <param name="soureString">需要测试的字符串</param>
+        /// <param name="fontSize">默认字体大小</param>
+        /// <returns></returns>
+        public float GetWidthPoint(BaseFont baseFont, string soureString, int fontSize = 12)
+        {
+            return baseFont.GetWidthPoint(soureString, fontSize);
+        }
+
+        /// <summary>
+        /// 获取字符位于基准线之上的距离
+        /// </summary>
+        /// <param name="baseFont">BaseFont类的实例</param>
+        /// <param name="soureString">需要测试的字符串</param>
+        /// <param name="fontSize">默认字体大小</param>
+        /// <returns></returns>
+        public float GetAscentPoint(BaseFont baseFont, string soureString, int fontSize = 12)
+        {
+            return baseFont.GetAscentPoint(soureString, fontSize);
+        }
+
+        /// <summary>
+        /// 获取字符位于基准线之下的距离
+        /// </summary>
+        /// <param name="baseFont">BaseFont类的实例</param>
+        /// <param name="soureString">需要测试的字符串</param>
+        /// <param name="fontSize">默认字体大小</param>
+        /// <returns></returns>
+        public float GetDescentPoint(BaseFont baseFont, string soureString, int fontSize = 12)
+        {
+            return baseFont.GetDescentPoint(soureString, fontSize);
+        }
+
+        /// <summary>
+        /// 获取字符串高度
+        /// 基准线之上距离 + 基准线之下的距离(负数)
+        /// </summary>
+        /// <param name="baseFont"></param>
+        /// <param name="soureString"></param>
+        /// <param name="fontSize"></param>
+        /// <returns></returns>
+        public float GetHeigthPoint(BaseFont baseFont, string soureString, int fontSize = 12)
+        {
+            return GetAscentPoint(baseFont, soureString) - GetDescentPoint(baseFont, soureString);
+        }
+
+        /// <summary>
+        /// 定位字符串
+        /// </summary>
+        /// <param name="canvas">PdfContentByte</param>
+        /// <param name="alignment">对齐方式</param>
+        /// <param name="phrase">Phrase</param>
+        /// <param name="offsetLeft">X轴开始或结束坐标 1.Element.ALIGN_LEFT:开始坐标；2.Element.ALIGN_RIGHT：结束坐标</param>
+        /// <param name="offsetBottom">Y轴基准线坐标</param>
+        /// <param name="rotation">旋转角</param>
+        public void ShowTextAligned(PdfContentByte canvas, int alignment, Phrase phrase, float offsetLeft, float offsetBottom, float rotation)
+        {
+            ColumnText.ShowTextAligned(canvas, alignment, phrase, offsetLeft, offsetBottom, rotation);
         }
 
         /// <summary>
