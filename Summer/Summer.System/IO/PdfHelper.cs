@@ -248,6 +248,108 @@ namespace Summer.System.IO
         }
 
         /// <summary>
+        /// 创建PdfPTable表格，使用可用WidthPercentage宽度百分比来创建
+        /// 表格的宽度是可用空间的80%，例如A4纸的尺寸是：297mm×210mm，宽度为595pt
+        /// 则实际宽度为：595-36*2 = 523pt(36是左右页边距的宽度)
+        /// 可用宽度为： 523*80% = 418.4pt
+        /// </summary>
+        /// <param name="numColumns">表格列数</param>
+        /// <param name="relativeWidths">表格相对宽度（例如：new int[] {2, 1, 1}，将表格分成2+1+1=4等份：第一列占有2等份，其它的都占有1等份）</param>
+        /// <param name="tableWidth">表格宽度（pt）</param>
+        /// <returns></returns>
+        public PdfPTable CreateTable1(int numColumns, int[] relativeWidths, float tableWidth)
+        {
+            PdfPTable pdfTable = new PdfPTable(numColumns);
+            pdfTable.WidthPercentage = tableWidth / 5.23f;
+            pdfTable.SetWidths(relativeWidths);
+            return pdfTable;
+        }
+
+        /// <summary>
+        ///  创建PdfPTable表格，使用TotalWidth绝对宽度来创建
+        /// </summary>
+        /// <param name="numColumns">表格列数</param>
+        /// <param name="relativeWidths">表格相对宽度（例如：new int[] {2, 1, 1}，将表格分成2+1+1=4等份：第一列占有2等份，其它的都占有1等份）</param>
+        /// <param name="tableWidth">表格宽度（pt）</param>
+        /// <returns></returns>
+        public PdfPTable CreateTable2(int numColumns, float[] relativeWidths, float tableWidth)
+        {
+            PdfPTable pdfTable = new PdfPTable(numColumns);
+            pdfTable.TotalWidth = tableWidth;
+            pdfTable.LockedWidth = true;
+            pdfTable.SetWidths(relativeWidths);
+            return pdfTable;
+        }
+
+        /// <summary>
+        /// 创建PdfPTable表格，使用Rectangle和realWidths实际宽度来创建
+        /// </summary>
+        /// <param name="numColumns">表格列数</param>
+        /// <param name="realWidths">表格实际宽度（例如：new int[] {144, 72, 72}，将表格分成2+1+1=4等份：第一列占有144pt宽度，其它的都占有72pt宽度）</param>
+        /// <param name="rectangle">Rectangle</param>
+        /// <returns></returns>
+        public PdfPTable CreateTable3(int numColumns, float[] realWidths, Rectangle rectangle)
+        {
+            PdfPTable pdfTable = new PdfPTable(numColumns);
+            pdfTable.SetWidthPercentage(realWidths, rectangle);
+            return pdfTable;
+        }
+
+        /// <summary>
+        /// 创建PdfPTable表格，使用realWidths实际宽度来创建
+        /// </summary>
+        /// <param name="numColumns">表格列数</param>
+        /// <param name="realWidths">实际宽度，例如：new int[] {144, 72, 72}，将表格分成2+1+1=4等份：第一列占有144pt宽度，其它的都占有72pt宽度）</param>
+        /// <returns></returns>
+        public PdfPTable CreateTable4(int numColumns, float[] realWidths)
+        {
+            PdfPTable pdfTable = new PdfPTable(numColumns);
+            pdfTable.SetTotalWidth(realWidths);
+            pdfTable.LockedWidth = true;
+            return pdfTable;
+        }
+
+        /// <summary>
+        /// 创建默认的PdfPCell
+        /// </summary>
+        /// <param name="element">PdfPTable/PdfPCell/Image/Phrase/</param>
+        /// <returns></returns>
+        public PdfPCell CreatePdfCell(IElement element)
+        {
+            PdfPCell cell = new PdfPCell();
+            cell.AddElement(element);
+            return cell;
+        }
+
+        /// <summary>
+        /// 创建PdfPCell
+        /// </summary>
+        /// <param name="phrase"></param>
+        /// <param name="fixedLeading"></param>
+        /// <param name="multipliedLeading"></param>
+        /// <returns></returns>
+        public PdfPCell CreatePdfCell(Phrase phrase, float fixedLeading, float multipliedLeading)
+        {
+            PdfPCell cell = new PdfPCell(phrase);
+            cell.SetLeading(fixedLeading, multipliedLeading);
+            return cell;
+        }
+
+        /// <summary>
+        /// 创建PdfPCell
+        /// </summary>
+        /// <param name="phrase"></param>
+        /// <param name="padding"></param>
+        /// <returns></returns>
+        public PdfPCell CreatePdfCell(Phrase phrase, float padding)
+        {
+            PdfPCell cell = new PdfPCell();
+            cell.AddElement(phrase);
+            cell.Padding = padding;
+            return cell;
+        }
+
+        /// <summary>
         /// 创建文档标题（带下划线）
         /// </summary>
         /// <param name="title">文档标题</param>
