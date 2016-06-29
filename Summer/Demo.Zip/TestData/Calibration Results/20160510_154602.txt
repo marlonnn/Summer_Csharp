@@ -1,0 +1,20 @@
+1.2.4.1602 Build Date: 2016-05-10 15:45:28    Running as 64-bit
+
+Memory: 88    GDI Objects: 132    User Objects: 268    Experiment File: 未命名实验.ncf    Active Sample: [1] 样本1
+
+An unhandled exception occurred. 
+
+Error message: 未将对象引用设置到对象的实例。
+
+Stack Trace:    在 NovoCyte.ExpClass.ExpManager.SetPlotDoubleClick(Boolean isDoubleClick) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\ExpClass\ExpManager.cs:行号 1992
+   在 NovoCyte.ExpClass.ExpManager.CommandGatingTools(Object sender, EventArgs e) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\ExpClass\ExpManager.cs:行号 1982
+   在 NovoCyte.MainForm.GateButtonItem_Click(Object sender, EventArgs e) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\MainForm.cs:行号 1680
+   在 System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   在 System.Windows.Forms.ToolStripButton.OnClick(EventArgs e)
+   在 System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   在 System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   在 System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

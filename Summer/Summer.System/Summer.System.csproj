@@ -118,6 +118,9 @@
     <Compile Include="IO\IniFileHelper.cs" />
     <Compile Include="IO\PDFHelper.cs" />
     <Compile Include="IO\XmlFileHelper.cs" />
+    <Compile Include="IO\ZIP\IZipWorker.cs" />
+    <Compile Include="IO\ZIP\ZFile.cs" />
+    <Compile Include="IO\ZIP\BaseZip.cs" />
     <Compile Include="Log\LogHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -216,6 +219,7 @@
     <Content Include="Lib\C5.dll" />
     <Content Include="Lib\Common.Logging.dll" />
     <Content Include="Lib\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="Lib\Ionic.Zip.dll" />
     <Content Include="Lib\iTextAsian.dll" />
     <Content Include="Lib\iTextAsianCmaps.dll" />
     <Content Include="Lib\iTextSharp.dll" />

@@ -1,0 +1,21 @@
+1.2.4.1602 Build Date: 2016-05-10 16:45:00    Running as 64-bit
+
+Memory: 83    GDI Objects: 100    User Objects: 244    Experiment File: 未命名实验.ncf    Active Sample: [1] 样本1
+
+An unhandled exception occurred. 
+
+Error message: 未将对象引用设置到对象的实例。
+
+Stack Trace:    在 NovoCyte.ExpClass.ExpManager.CreatePlot(PlotType plotType, SampleConfig sample, Gate gate, Boolean open) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\ExpClass\ExpManager.cs:行号 309
+   在 NovoCyte.ExpClass.ExpManager.CreatePlot(PlotType plotType, Gate g) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\ExpClass\ExpManager.cs:行号 382
+   在 NovoCyte.MainForm.ShowPlotForm(PlotType plotType, Gate g) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\MainForm.cs:行号 996
+   在 NovoCyte.MainForm.DotPlotButtonItem_Click(Object sender, EventArgs e) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\MainForm.cs:行号 972
+   在 System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   在 System.Windows.Forms.ToolStripButton.OnClick(EventArgs e)
+   在 System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   在 System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   在 System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

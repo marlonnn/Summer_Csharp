@@ -1,0 +1,19 @@
+1.2.4.1602 Build Date: 2016-05-06 15:01:35    Running as 64-bit
+
+Memory: 98    GDI Objects: 113    User Objects: 271    Experiment File: 未命名实验.ncf    Active Sample: [0] 
+
+An unhandled exception occurred. 
+
+Error message: 未将对象引用设置到对象的实例。
+
+Stack Trace:    在 NovoCyte.UI.ProblemReportForm.ZipFileTask() 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\UI\ProblemReportForm.cs:行号 115
+   在 NovoCyte.UI.ProblemReportForm.PageCreating_AfterPageDisplayed(Object sender, WizardPageChangeEventArgs e) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\UI\ProblemReportForm.cs:行号 90
+   在 DevComponents.DotNetBar.WizardPage.OnAfterPageDisplayed(WizardPageChangeEventArgs e)
+   在 DevComponents.DotNetBar.Wizard.⳥(WizardPage ◦, eWizardPageChangeSource ⳦)
+   在 DevComponents.DotNetBar.Wizard.NavigateNext()
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 DevComponents.DotNetBar.ButtonX.OnClick(EventArgs e)
+   在 DevComponents.DotNetBar.ButtonX.OnMouseUp(MouseEventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

@@ -1,0 +1,17 @@
+1.2.4.1602 Build Date: 2016-05-05 14:46:52    Running as 64-bit
+
+Memory: 110    GDI Objects: 116    User Objects: 267    Experiment File: 未命名实验.ncf    Active Sample: [0] 
+
+An unhandled exception occurred. 
+
+Error message: 提供的筛选器字符串无效。筛选器字符串必须包含筛选器的说明，后跟竖线(|)和筛选模式。不同筛选选项的字符串还必须以竖线分隔。例如:“文本文件(*.txt)|*.txt|所有文件(*.*)|*.*”
+
+Stack Trace:    在 System.Windows.Forms.FileDialog.set_Filter(String value)
+   在 NovoCyte.UI.ProblemReportForm.ShowOpenFileDialog() 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\UI\ProblemReportForm.cs:行号 59
+   在 NovoCyte.UI.ProblemReportForm.ButtonAdd_Click(Object sender, EventArgs e) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\UI\ProblemReportForm.cs:行号 51
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 DevComponents.DotNetBar.ButtonX.OnClick(EventArgs e)
+   在 DevComponents.DotNetBar.ButtonX.OnMouseUp(MouseEventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

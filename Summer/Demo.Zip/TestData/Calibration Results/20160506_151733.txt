@@ -1,0 +1,23 @@
+1.2.4.1602 Build Date: 2016-05-06 15:17:11    Running as 64-bit
+
+Memory: 127    GDI Objects: 163    User Objects: 285    Experiment File: 未命名实验.ncf    Active Sample: [0] 
+
+An unhandled exception occurred. 
+
+Error message: 未能找到路径“E:\Code\FC\Branch\1.2.4 new\RunTime\Calibration Results”的一部分。
+
+Stack Trace:    在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileSystemEnumerableIterator`1.CommonInit()
+   在 System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler, Boolean checkHost)
+   在 System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
+   在 NovoCyte.UI.ProblemReportForm.GetFileInfo(String baseDirectory, String fileFolder) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\UI\ProblemReportForm.cs:行号 218
+   在 NovoCyte.UI.ProblemReportForm.GetAllZipFiles() 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\UI\ProblemReportForm.cs:行号 161
+   在 NovoCyte.UI.ProblemReportForm.PageSelectFiles_NextButtonClick(Object sender, CancelEventArgs e) 位置 E:\Code\FC\Branch\1.2.4 new\Code\NovoCyte\UI\ProblemReportForm.cs:行号 142
+   在 DevComponents.DotNetBar.WizardPage.OnNextButtonClick(CancelEventArgs e)
+   在 DevComponents.DotNetBar.Wizard.NavigateNext()
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 DevComponents.DotNetBar.ButtonX.OnClick(EventArgs e)
+   在 DevComponents.DotNetBar.ButtonX.OnMouseUp(MouseEventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

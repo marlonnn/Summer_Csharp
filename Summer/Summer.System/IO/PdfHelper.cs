@@ -288,7 +288,7 @@ namespace Summer.System.IO
         /// <param name="realWidths">表格实际宽度（例如：new int[] {144, 72, 72}，将表格分成2+1+1=4等份：第一列占有144pt宽度，其它的都占有72pt宽度）</param>
         /// <param name="rectangle">Rectangle</param>
         /// <returns></returns>
-        public PdfPTable CreateTable3(int numColumns, float[] realWidths, Rectangle rectangle)
+        public PdfPTable CreateTable(int numColumns, float[] realWidths, Rectangle rectangle)
         {
             PdfPTable pdfTable = new PdfPTable(numColumns);
             pdfTable.SetWidthPercentage(realWidths, rectangle);
@@ -301,7 +301,7 @@ namespace Summer.System.IO
         /// <param name="numColumns">表格列数</param>
         /// <param name="realWidths">实际宽度，例如：new int[] {144, 72, 72}，将表格分成2+1+1=4等份：第一列占有144pt宽度，其它的都占有72pt宽度）</param>
         /// <returns></returns>
-        public PdfPTable CreateTable4(int numColumns, float[] realWidths)
+        public PdfPTable CreateTable(int numColumns, float[] realWidths)
         {
             PdfPTable pdfTable = new PdfPTable(numColumns);
             pdfTable.SetTotalWidth(realWidths);
