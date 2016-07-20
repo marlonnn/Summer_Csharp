@@ -156,6 +156,7 @@
     <Compile Include="Util\Fonts.cs" />
     <Compile Include="Util\Matcher.cs" />
     <Compile Include="Util\MathHelper.cs" />
+    <Compile Include="Util\MiniDump.cs" />
     <Compile Include="Util\NetSetAnyIpep.cs" />
     <Compile Include="Util\DbHelper.cs" />
     <Compile Include="Util\NullHelper.cs" />
