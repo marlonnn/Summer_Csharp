@@ -1,4 +1,6 @@
-﻿using AForge.Video.FFMPEG;
+﻿using Splicer.Renderer;
+using Splicer.Timeline;
+using Splicer.WindowsMedia;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +24,8 @@ namespace Demo.Animation
 
         private MovieMaker maker;
 
+        private string outputFile = @"FadeBetweenImages.avi";
+
         public Form()
         {
             InitializeComponent();
@@ -40,15 +44,6 @@ namespace Demo.Animation
             {
                 Frames[i] = new Bitmap(fileInfos[i].FullName);
             }
-            try
-            {
-                CreateVideo(Frames);
-            }
-            catch (Exception ee)
-            {
-
-
-            }
 
             // Display the first frame.
             picFrame.Image = Frames[FrameNum];
@@ -59,22 +54,22 @@ namespace Demo.Animation
                 picFrame.Bottom + picFrame.Left);
         }
 
-        public void CreateVideo(Bitmap[] bitmaps)
-        {
-            int width = 320;
-            int height = 240;
+        //public void CreateVideo(Bitmap[] bitmaps)
+        //{
+        //    int width = 320;
+        //    int height = 240;
 
-            // create instance of video writer
-            VideoFileWriter writer = new VideoFileWriter();
-            // create new video file
-            writer.Open(@"\Frames\test.avi", width, height, 25, VideoCodec.MPEG4);
-            // write 1000 video frames
-            for (int i = 0; i < bitmaps.Length; i++)
-            {
-                writer.WriteVideoFrame(bitmaps[i]);
-            }
-            writer.Close();
-        }
+        //    // create instance of video writer
+        //    VideoFileWriter writer = new VideoFileWriter();
+        //    // create new video file
+        //    writer.Open(@"\Frames\test.avi", width, height, 25, VideoCodec.MPEG4);
+        //    // write 1000 video frames
+        //    for (int i = 0; i < bitmaps.Length; i++)
+        //    {
+        //        writer.WriteVideoFrame(bitmaps[i]);
+        //    }
+        //    writer.Close();
+        //}
 
         private FileInfo[] GetFileInfo(string fileFolder, string[] filter)
         {
@@ -117,6 +112,43 @@ namespace Demo.Animation
         {
             FrameNum = ++FrameNum % Frames.Length;
             picFrame.Image = Frames[FrameNum];
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "AVI|*.avi";
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    outputFile = saveFileDialog1.FileName;
+                    using (ITimeline timeline = new DefaultTimeline(25))
+                    {
+                        IGroup group = timeline.AddVideoGroup(32, 320, 240);
+
+                        ITrack videoTrack = group.AddTrack();
+                        for (int i = 0; i < Frames.Length; i++)
+                        {
+                            videoTrack.AddImage(Frames[i], 0, 1);
+                        }
+                        // add some audio
+                        ITrack audioTrack = timeline.AddAudioGroup().AddTrack();
+                        // render our slideshow out to a windows media file
+                        //IRenderer renderer = new WindowsMediaRenderer(timeline, outputFile, WindowsMediaProfiles.HighQualityVideo);
+                        //renderer.Render();
+                        using (WindowsMediaRenderer renderer =
+                              new WindowsMediaRenderer(timeline, outputFile, WindowsMediaProfiles.HighQualityVideo))
+                        {
+                            renderer.Render();
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                }
+            }
         }
     }
 }

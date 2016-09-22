@@ -35,6 +35,7 @@
             this.picFrame = new System.Windows.Forms.PictureBox();
             this.btnStartStop = new System.Windows.Forms.Button();
             this.tmrNextFrame = new System.Windows.Forms.Timer(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picFrame)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,11 +96,22 @@
             this.tmrNextFrame.Interval = 20;
             this.tmrNextFrame.Tick += new System.EventHandler(this.tmrNextFrame_Tick);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(189, 56);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 8;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(460, 457);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.picFrame);
             this.Controls.Add(this.btnStartStop);
             this.Controls.Add(this.lblFps);
@@ -122,6 +134,7 @@
         private System.Windows.Forms.PictureBox picFrame;
         private System.Windows.Forms.Button btnStartStop;
         private System.Windows.Forms.Timer tmrNextFrame;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 

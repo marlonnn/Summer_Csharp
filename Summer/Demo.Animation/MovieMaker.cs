@@ -1,5 +1,4 @@
-﻿using AForge.Video.FFMPEG;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -25,19 +24,19 @@ namespace Demo.Animation
 
         public void CreateVideo(Bitmap[] bitmaps)
         {
-            int width = 320;
-            int height = 240;
+            //int width = 320;
+            //int height = 240;
 
-            // create instance of video writer
-            VideoFileWriter writer = new VideoFileWriter();
-            // create new video file
-            writer.Open(@"\Frames\test.avi", width, height, 25, VideoCodec.MPEG4);
-            // write 1000 video frames
-            for (int i = 0; i < bitmaps.Length; i++)
-            {
-                writer.WriteVideoFrame(bitmaps[i]);
-            }
-            writer.Close();
+            //// create instance of video writer
+            //VideoFileWriter writer = new VideoFileWriter();
+            //// create new video file
+            //writer.Open(@"\Frames\test.avi", width, height, 25, VideoCodec.MPEG4);
+            //// write 1000 video frames
+            //for (int i = 0; i < bitmaps.Length; i++)
+            //{
+            //    writer.WriteVideoFrame(bitmaps[i]);
+            //}
+            //writer.Close();
         }
     }
 }

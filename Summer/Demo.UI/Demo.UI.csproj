@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EB80B12F-A75C-46BE-840E-417B49E126D9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Demo.UI</RootNamespace>
+    <AssemblyName>Demo.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\Demo\UI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomPanel.Designer.cs">
+      <DependentUpon>CustomPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DiagramPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DiagramPanel.Designer.cs">
+      <DependentUpon>DiagramPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Filters.Designer.cs">
+      <DependentUpon>Filters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LightCollectionOptics.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LightCollectionOptics.Designer.cs">
+      <DependentUpon>LightCollectionOptics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LineTop.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LineTop.Designer.cs">
+      <DependentUpon>LineTop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PMT.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PMT.Designer.cs">
+      <DependentUpon>PMT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spectroscope.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spectroscope.Designer.cs">
+      <DependentUpon>Spectroscope.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpectroscopeB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpectroscopeB.Designer.cs">
+      <DependentUpon>SpectroscopeB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpectroscopeA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpectroscopeA.Designer.cs">
+      <DependentUpon>SpectroscopeA.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CustomPanel.resx">
+      <DependentUpon>CustomPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiagramPanel.resx">
+      <DependentUpon>DiagramPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LightCollectionOptics.resx">
+      <DependentUpon>LightCollectionOptics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PMT.resx">
+      <DependentUpon>PMT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Spectroscope.resx">
+      <DependentUpon>Spectroscope.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpectroscopeA.resx">
+      <DependentUpon>SpectroscopeA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpectroscopeB.resx">
+      <DependentUpon>SpectroscopeB.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Summer.UI\Summer.UI.csproj">
+      <Project>{052319c6-e01f-4b28-969b-b9101878f67a}</Project>
+      <Name>Summer.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
