@@ -10,7 +10,7 @@ using System.Drawing.Drawing2D;
 namespace Summer.UI.Line
 {
     [Designer(typeof(ShapeControlDesigner))]
-    public class Line : Control, IShape, INotifyPropertyChanged
+    public class Line : UserControl, IShape, INotifyPropertyChanged
     {
 
         #region Fields
@@ -146,6 +146,7 @@ namespace Summer.UI.Line
         {
             _p1 = new Point(5, 5);
             _p2 = new Point(45, 45);
+            //DoubleBuffered = true;
         }
 
         #endregion
@@ -197,14 +198,11 @@ namespace Summer.UI.Line
 
             Color opacityColor = Color.FromArgb((int)(255 * _opacity), _lineColor);
             using (Pen p = new Pen(opacityColor, _penWidth))
-            using (GraphicsPath capPath = new GraphicsPath())
+            using (AdjustableArrowCap lineCap =
+                new AdjustableArrowCap(4, 4, true))
             {
                 // A triangle
-                capPath.AddLine(-2, 0, 2, 0);
-                capPath.AddLine(-2, 0, 0, 2);
-                capPath.AddLine(0, 2, 2, 0);
-                capPath.FillMode = FillMode.Alternate;
-                p.CustomEndCap = new CustomLineCap(null, capPath);
+                p.CustomEndCap = lineCap;
                 //p.EndCap = LineCap.ArrowAnchor;
                 e.Graphics.DrawLine(p, _p1, _p2);
             }

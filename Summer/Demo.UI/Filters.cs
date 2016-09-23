@@ -182,7 +182,7 @@ namespace Demo.UI
             _innerRect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
 
             _pen = new Pen(Color.Black, 1);
-            _clickPen = new Pen(Color.Red, 3);
+            _clickPen = new Pen(Color.Black, 3);
             _solidBrush = new SolidBrush(Color.Orange);
             _lightSolidBrush = new SolidBrush(Color.LightCyan);
         }

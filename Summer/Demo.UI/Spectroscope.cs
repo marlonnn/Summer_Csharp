@@ -14,6 +14,7 @@ namespace Demo.UI
 {
     public partial class Spectroscope : UserControl
     {
+        private Region _region;
 
         public enum Shape
         {
@@ -28,31 +29,111 @@ namespace Demo.UI
             Clicked
         }
 
-        private LinearGradientMode _mode;
+        // default values
+        private bool _Active = true;
+
+        [Description("Enable the button?"), Category("Spectroscope")]
+        public bool Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                _Active = value;
+                this.Invalidate();
+            }
+        }
+
+        private States _State = States.Normal;
+
+        private SolidBrush _lightSolidBrush, _solidBrush;
+
         private Rectangle _fillRect;
-        private Pen _pen;
-        private LinearGradientBrush _brush;
+        private Pen _pen, _clickPen;
+
         private Shape _shape;
-        private States _state = States.Normal;
-        //private GraphicsPath _graphicsPath;
+        [Description("Shape the Spectroscope?"), Category("Spectroscope"), DefaultValue(typeof(Shape), "TOP")]
+        public Shape SpectrosShape
+        {
+            get
+            {
+                return this._shape;
+            }
+
+            set
+            {
+                if (value != this._shape)
+                {
+                    this._shape = value;
+                    InvokeInvalidate(value);
+                    this.Invalidate();
+                }
+            }
+        }
+
+        private string _spectrosText;
+
+        [Description("Filter Display Text"), Category("Appearance")]
+        public string SpectrosText
+        {
+            get
+            {
+                return _spectrosText;
+            }
+            set
+            {
+                if (value != _spectrosText)
+                {
+                    _spectrosText = value;
+                    InvokeInvalidate(value);
+                    this.Invalidate();
+                }
+            }
+        }
+
+        private void InvokeInvalidate(string value)
+        {
+            if (!IsHandleCreated)
+                return;
+            try
+            {
+                this.Invoke((MethodInvoker)delegate { this.label1.Text = value; });
+            }
+            catch { }
+        }
+
+        private void InvokeInvalidate(Shape value)
+        {
+            if (!IsHandleCreated)
+                return;
+            try
+            {
+                this.Invoke((MethodInvoker)delegate { this._shape = value; });
+            }
+            catch { }
+        }
+
+        //private PointF[] _curvePoints;
+
 
         public Spectroscope()
         {
             InitializeComponent();
 
-            _mode = LinearGradientMode.ForwardDiagonal;
             _fillRect = new Rectangle(this.Location.X, this.Location.Y, this.Width, this.Height);
             _pen = new Pen(Color.Black, 1);
-            _brush = new LinearGradientBrush(_fillRect, Color.Pink, Color.Pink, _mode);
-            _shape = Shape.TOP;
-
-            //_graphicsPath = new GraphicsPath();
-            this.Click += Spectroscope_Click;
+            _clickPen = new Pen(Color.Black, 2);
+            _solidBrush = new SolidBrush(Color.Pink);
+            _lightSolidBrush = new SolidBrush(Color.LightCyan);
+            //_shape = Shape.TOP;
         }
 
-        private void Spectroscope_Click(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
-
+            //_curvePoints = CurvePoint(_shape);
+            base.OnLoad(e);
         }
 
         public Shape ShapeType
@@ -67,31 +148,51 @@ namespace Demo.UI
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            DrawTrapezoid(e);
-        }
-
-        private void DrawTrapezoid(PaintEventArgs e)
-        {
-            // Create points that define polygon.
-            PointF[] curvePoints = CurvePoint(_shape);
-            switch (_state)
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            if (String.IsNullOrEmpty(SpectrosText))
             {
-                case States.Normal:
-                    _brush = new LinearGradientBrush(_fillRect, Color.Pink, Color.Pink, _mode);
-                    e.Graphics.FillPolygon(_brush, curvePoints);
-                    e.Graphics.DrawPolygon(_pen, curvePoints);
-                    break;
-                case States.MouseOver:
-                    _brush = new LinearGradientBrush(_fillRect, Color.MediumVioletRed, Color.MediumVioletRed, _mode);
-                    e.Graphics.FillPolygon(_brush, curvePoints);
-                    e.Graphics.DrawPolygon(_pen, curvePoints);
-                    var v1 = this.Parent;
-                    v1.Refresh();
-                    break;
+                SpectrosText = this.Name;
             }
+            else
+            {
+                this.label1.Text = SpectrosText;
+            }
+
+            DrawTrapezoid(graphics);
         }
 
+        private void DrawTrapezoid(Graphics graphics)
+        {
+            if (_Active)
+            {
+                GraphicsPath path = new GraphicsPath();
+                PointF[] _curvePoints = CurvePoint(SpectrosShape);
+                path.AddPolygon(_curvePoints);
+                _region = new Region(path);
+                switch (_State)
+                {
+                    case States.Normal:
+                        graphics.FillPolygon(_solidBrush, _curvePoints);
+                        graphics.DrawPolygon(_pen, _curvePoints);
+                        break;
+                    case States.MouseOver:
+                        graphics.FillPolygon(_lightSolidBrush, _curvePoints);
+                        graphics.DrawPolygon(_pen, _curvePoints);
+                        break;
+                    case States.Clicked:
+                        graphics.FillPolygon(_lightSolidBrush, _curvePoints);
+                        graphics.DrawPolygon(_clickPen, _curvePoints);
+                        break;
+                }
+            }
+
+        }
+
+        /// <summary>
+        ///Create points that define polygon.
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns></returns>
         private PointF[] CurvePoint(Shape shape)
         {
             PointF point1 = new PointF();
@@ -136,28 +237,65 @@ namespace Demo.UI
             this.label1.Location = new Point(this.Width / 2 + 8, this.Width / 2 - 20);
         }
 
-        protected override void OnMouseMove(MouseEventArgs e)
+        protected override void OnMouseLeave(System.EventArgs e)
         {
-            //if (_graphicsPath.IsVisible(e.Location))
-            //{
-            //    _state = States.MouseOver;
-            //    this.Invalidate();
-            //}
+            if (_Active)
+            {
+                _State = States.Normal;
+                this.Invalidate(_region);
+                base.OnMouseLeave(e);
+            }
         }
 
-        protected override void OnMouseUp(MouseEventArgs e)
+        protected override void OnMouseEnter(System.EventArgs e)
         {
-            //if (_graphicsPath.IsVisible(e.Location))
-            //{
-            //    _state = States.Normal;
-            //    this.Invalidate();
-            //}
+            if (_Active)
+            {
+                _State = States.MouseOver;
+                this.Invalidate(_region);
+            }
+        }
+
+        protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
+        {
+            if (_Active)
+            {
+                _State = States.MouseOver;
+                this.Invalidate(_region);
+                base.OnMouseUp(e);
+            }
+        }
+
+        protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
+        {
+            if (_Active)
+            {
+                _State = States.Clicked;
+                this.Invalidate(_region);
+                base.OnMouseDown(e);
+
+            }
+        }
+
+        protected override void OnClick(System.EventArgs e)
+        {
+            // prevent click when button is inactive
+            if (_Active)
+            {
+                if (_State == States.Clicked)
+                {
+                    base.OnClick(e);
+                }
+            }
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
+                _solidBrush.Dispose();
+                _lightSolidBrush.Dispose();
+
                 components.Dispose();
             }
             base.Dispose(disposing);

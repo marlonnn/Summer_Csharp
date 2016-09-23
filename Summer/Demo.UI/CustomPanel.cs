@@ -24,5 +24,10 @@ namespace Demo.UI
         {
 
         }
+
+        private void pmt7_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

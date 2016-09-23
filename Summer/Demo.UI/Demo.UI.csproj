@@ -108,6 +108,12 @@
     <Compile Include="SpectroscopeA.Designer.cs">
       <DependentUpon>SpectroscopeA.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZstyleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ZstyleControl.Designer.cs">
+      <DependentUpon>ZstyleControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CustomPanel.resx">
       <DependentUpon>CustomPanel.cs</DependentUpon>
     </EmbeddedResource>

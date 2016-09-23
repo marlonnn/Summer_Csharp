@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -53,7 +54,7 @@
     <Compile Include="Line\GraphicsExtensions.cs" />
     <Compile Include="Line\IShape.cs" />
     <Compile Include="Line\Line.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Line\PointGlyph.cs" />
     <Compile Include="Line\ShapeControlDesigner.cs" />

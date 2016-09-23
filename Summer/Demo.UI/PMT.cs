@@ -85,7 +85,7 @@ namespace Demo.UI
             _vPen = new Pen(Color.Violet, 1);
             _bPen = new Pen(Color.Blue, 1);
             _rPen = new Pen(Color.Red, 1);
-            _clickPen = new Pen(Color.Red, 3);
+            _clickPen = new Pen(Color.Black, 3);
 
             _solidBrush = new SolidBrush(Color.LightSkyBlue);
             _lightSolidBrush = new SolidBrush(Color.LightCyan);
