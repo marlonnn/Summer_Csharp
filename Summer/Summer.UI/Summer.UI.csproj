@@ -48,6 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute.cs" />
+    <Compile Include="Button\BaseButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Button\BaseButton.Designer.cs">
+      <DependentUpon>BaseButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LogListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -75,6 +82,7 @@
       <DependentUpon>OrientedTextLabel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

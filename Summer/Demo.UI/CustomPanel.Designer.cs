@@ -281,93 +281,71 @@
             // filters7
             // 
             this.filters7.Active = true;
-            this.filters7.FilterText = "filters7";
             this.filters7.Location = new System.Drawing.Point(267, 357);
             this.filters7.Name = "filters7";
             this.filters7.RotationAngle = -90D;
             this.filters7.Size = new System.Drawing.Size(30, 60);
             this.filters7.TabIndex = 49;
-            this.filters7.TextHeight = 13.82519F;
-            this.filters7.TextWidth = 37.16617F;
             // 
             // filters6
             // 
             this.filters6.Active = true;
-            this.filters6.FilterText = "filters6";
             this.filters6.Location = new System.Drawing.Point(213, 297);
             this.filters6.Name = "filters6";
             this.filters6.RotationAngle = -90D;
             this.filters6.Size = new System.Drawing.Size(30, 60);
             this.filters6.TabIndex = 48;
-            this.filters6.TextHeight = 13.82519F;
-            this.filters6.TextWidth = 37.16617F;
             // 
             // filters5
             // 
             this.filters5.Active = true;
-            this.filters5.FilterText = "filters5";
             this.filters5.Location = new System.Drawing.Point(154, 237);
             this.filters5.Name = "filters5";
             this.filters5.RotationAngle = -90D;
             this.filters5.Size = new System.Drawing.Size(30, 60);
             this.filters5.TabIndex = 47;
-            this.filters5.TextHeight = 13.82519F;
-            this.filters5.TextWidth = 37.16617F;
             // 
             // filters4
             // 
             this.filters4.Active = true;
-            this.filters4.FilterText = "filters4";
             this.filters4.Location = new System.Drawing.Point(116, 180);
             this.filters4.Name = "filters4";
             this.filters4.RotationAngle = -90D;
             this.filters4.Size = new System.Drawing.Size(30, 60);
             this.filters4.TabIndex = 46;
-            this.filters4.TextHeight = 13.82519F;
-            this.filters4.TextWidth = 37.16617F;
             // 
             // filters3
             // 
             this.filters3.Active = true;
-            this.filters3.FilterText = "filters3";
             this.filters3.Location = new System.Drawing.Point(327, 199);
             this.filters3.Name = "filters3";
             this.filters3.RotationAngle = 0D;
             this.filters3.Size = new System.Drawing.Size(60, 30);
             this.filters3.TabIndex = 45;
-            this.filters3.TextHeight = 13.82519F;
-            this.filters3.TextWidth = 37.16617F;
             // 
             // filters2
             // 
             this.filters2.Active = true;
-            this.filters2.FilterText = "filters2";
             this.filters2.Location = new System.Drawing.Point(272, 151);
             this.filters2.Name = "filters2";
             this.filters2.RotationAngle = 0D;
             this.filters2.Size = new System.Drawing.Size(60, 30);
             this.filters2.TabIndex = 44;
-            this.filters2.TextHeight = 13.82519F;
-            this.filters2.TextWidth = 37.16617F;
             // 
             // filters1
             // 
             this.filters1.Active = true;
-            this.filters1.FilterText = "filters1";
             this.filters1.Location = new System.Drawing.Point(220, 113);
             this.filters1.Name = "filters1";
             this.filters1.RotationAngle = 0D;
             this.filters1.Size = new System.Drawing.Size(60, 30);
             this.filters1.TabIndex = 43;
-            this.filters1.TextHeight = 13.82519F;
-            this.filters1.TextWidth = 37.16617F;
             // 
             // pmt7
             // 
             this.pmt7.Active = true;
             this.pmt7.Location = new System.Drawing.Point(143, 372);
             this.pmt7.Name = "pmt7";
-            this.pmt7.PMTText = "pmt7";
             this.pmt7.Size = new System.Drawing.Size(60, 30);
             this.pmt7.TabIndex = 42;
             this.pmt7.Load += new System.EventHandler(this.pmt7_Load);
@@ -377,7 +355,6 @@
             this.pmt6.Active = true;
             this.pmt6.Location = new System.Drawing.Point(88, 311);
             this.pmt6.Name = "pmt6";
-            this.pmt6.PMTText = "pmt6";
             this.pmt6.Size = new System.Drawing.Size(60, 30);
             this.pmt6.TabIndex = 42;
             // 
@@ -386,7 +363,6 @@
             this.pmt5.Active = true;
             this.pmt5.Location = new System.Drawing.Point(44, 250);
             this.pmt5.Name = "pmt5";
-            this.pmt5.PMTText = "pmt5";
             this.pmt5.Size = new System.Drawing.Size(60, 30);
             this.pmt5.TabIndex = 42;
             // 
@@ -395,7 +371,6 @@
             this.pmt4.Active = true;
             this.pmt4.Location = new System.Drawing.Point(14, 197);
             this.pmt4.Name = "pmt4";
-            this.pmt4.PMTText = "pmt4";
             this.pmt4.Size = new System.Drawing.Size(60, 30);
             this.pmt4.TabIndex = 42;
             // 
@@ -404,7 +379,6 @@
             this.pmt3.Active = true;
             this.pmt3.Location = new System.Drawing.Point(327, 112);
             this.pmt3.Name = "pmt3";
-            this.pmt3.PMTText = "pmt3";
             this.pmt3.Size = new System.Drawing.Size(60, 30);
             this.pmt3.TabIndex = 42;
             // 
@@ -413,7 +387,6 @@
             this.pmt2.Active = true;
             this.pmt2.Location = new System.Drawing.Point(272, 78);
             this.pmt2.Name = "pmt2";
-            this.pmt2.PMTText = "pmt2";
             this.pmt2.Size = new System.Drawing.Size(60, 30);
             this.pmt2.TabIndex = 42;
             // 
@@ -422,7 +395,6 @@
             this.pmt1.Active = true;
             this.pmt1.Location = new System.Drawing.Point(219, 44);
             this.pmt1.Name = "pmt1";
-            this.pmt1.PMTText = "pmt1";
             this.pmt1.Size = new System.Drawing.Size(60, 30);
             this.pmt1.TabIndex = 42;
             // 

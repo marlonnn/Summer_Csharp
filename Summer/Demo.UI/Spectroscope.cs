@@ -9,49 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using Summer.UI.Line;
+using Summer.UI.Button;
 
 namespace Demo.UI
 {
-    public partial class Spectroscope : UserControl
+    public partial class Spectroscope : BaseButton
     {
-        private Region _region;
-
         public enum Shape
         {
             TOP,
             BOTTOM,
         }
-
-        public enum States
-        {
-            Normal,
-            MouseOver,
-            Clicked
-        }
-
-        // default values
-        private bool _Active = true;
-
-        [Description("Enable the button?"), Category("Spectroscope")]
-        public bool Active
-        {
-            get
-            {
-                return _Active;
-            }
-            set
-            {
-                _Active = value;
-                this.Invalidate();
-            }
-        }
-
-        private States _State = States.Normal;
-
-        private SolidBrush _lightSolidBrush, _solidBrush;
-
-        private Rectangle _fillRect;
-        private Pen _pen, _clickPen;
 
         private Shape _shape;
         [Description("Shape the Spectroscope?"), Category("Spectroscope"), DefaultValue(typeof(Shape), "TOP")]
@@ -115,24 +83,16 @@ namespace Demo.UI
             catch { }
         }
 
-        //private PointF[] _curvePoints;
-
-
         public Spectroscope()
         {
             InitializeComponent();
 
             _fillRect = new Rectangle(this.Location.X, this.Location.Y, this.Width, this.Height);
-            _pen = new Pen(Color.Black, 1);
-            _clickPen = new Pen(Color.Black, 2);
             _solidBrush = new SolidBrush(Color.Pink);
-            _lightSolidBrush = new SolidBrush(Color.LightCyan);
-            //_shape = Shape.TOP;
         }
 
         protected override void OnLoad(EventArgs e)
         {
-            //_curvePoints = CurvePoint(_shape);
             base.OnLoad(e);
         }
 
@@ -171,15 +131,15 @@ namespace Demo.UI
                 _region = new Region(path);
                 switch (_State)
                 {
-                    case States.Normal:
+                    case Summer.UI.Attribute.States.Normal:
                         graphics.FillPolygon(_solidBrush, _curvePoints);
                         graphics.DrawPolygon(_pen, _curvePoints);
                         break;
-                    case States.MouseOver:
+                    case Summer.UI.Attribute.States.MouseOver:
                         graphics.FillPolygon(_lightSolidBrush, _curvePoints);
                         graphics.DrawPolygon(_pen, _curvePoints);
                         break;
-                    case States.Clicked:
+                    case Summer.UI.Attribute.States.Clicked:
                         graphics.FillPolygon(_lightSolidBrush, _curvePoints);
                         graphics.DrawPolygon(_clickPen, _curvePoints);
                         break;
@@ -234,68 +194,41 @@ namespace Demo.UI
         {
             base.OnResize(e);
             this.Width = this.Height;
-            this.label1.Location = new Point(this.Width / 2 + 8, this.Width / 2 - 20);
+            if (this.label1 != null)
+            {
+                this.label1.Location = new Point(this.Width / 2 + 8, this.Width / 2 - 20);
+            }
         }
 
         protected override void OnMouseLeave(System.EventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.Normal;
-                this.Invalidate(_region);
-                base.OnMouseLeave(e);
-            }
+            base.OnMouseLeave(e);
         }
 
         protected override void OnMouseEnter(System.EventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.MouseOver;
-                this.Invalidate(_region);
-            }
+            base.OnMouseEnter(e);
         }
 
         protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.MouseOver;
-                this.Invalidate(_region);
-                base.OnMouseUp(e);
-            }
+            base.OnMouseUp(e);
         }
 
         protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.Clicked;
-                this.Invalidate(_region);
-                base.OnMouseDown(e);
-
-            }
+            base.OnMouseDown(e);
         }
 
         protected override void OnClick(System.EventArgs e)
         {
-            // prevent click when button is inactive
-            if (_Active)
-            {
-                if (_State == States.Clicked)
-                {
-                    base.OnClick(e);
-                }
-            }
+            base.OnClick(e);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
-                _solidBrush.Dispose();
-                _lightSolidBrush.Dispose();
-
                 components.Dispose();
             }
             base.Dispose(disposing);

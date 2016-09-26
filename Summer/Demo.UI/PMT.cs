@@ -8,87 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using Summer.UI.Button;
 
 namespace Demo.UI
 {
-    public partial class PMT : UserControl
+    public partial class PMT : BaseButton
     {
-        private enum States
-        {
-            Normal,
-            MouseOver,
-            Clicked
-        }
-
-        private Rectangle _fillRect, _innerRect;
-        private Pen _pen, _vPen, _bPen, _rPen, _clickPen;
-        private SolidBrush _solidBrush, _vSolidBrush, _bSolidBrush, _rSolidBrush, _lightSolidBrush;
+        private Pen  _vPen, _bPen, _rPen;
+        private SolidBrush _vSolidBrush, _bSolidBrush, _rSolidBrush;
         private Rectangle _vRectangle, _bRectangle, _rRectangle;
 
-        // default values
-        private bool _Active = true;
-
-        [Description("Enable the button?"), Category("PMT")]
-        public bool Active
-        {
-            get
-            {
-                return _Active;
-            }
-            set
-            {
-                _Active = value;
-                this.Invalidate();
-            }
-        }
-
-        private string _pmtText;
-
-        [Description("PMT Display Text"), Category("Appearance")]
-        public string PMTText
-        {
-            get
-            {
-                return _pmtText;
-            }
-            set
-            {
-                if (value != _pmtText)
-                {
-                    _pmtText = value;
-                    this.Invalidate();
-                    InvokeInvalidate(value);
-                }
-            }
-        }
-
-        private void InvokeInvalidate(string value)
-        {
-            if (!IsHandleCreated)
-                return;
-            try
-            {
-                this.Invoke((MethodInvoker)delegate { this.orientedTextLabel1.Text = value; });
-            }
-            catch { }
-        }
-
-        private States _State = States.Normal;
-        public PMT()
+        //private States _State = States.Normal;
+        public PMT() 
         {
             InitializeComponent();
-
-            _fillRect = new Rectangle(0, 0, this.Width, this.Height);
-            _innerRect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
-            _pen = new Pen(Color.Black, 1);
 
             _vPen = new Pen(Color.Violet, 1);
             _bPen = new Pen(Color.Blue, 1);
             _rPen = new Pen(Color.Red, 1);
-            _clickPen = new Pen(Color.Black, 3);
 
             _solidBrush = new SolidBrush(Color.LightSkyBlue);
-            _lightSolidBrush = new SolidBrush(Color.LightCyan);
 
             _vSolidBrush = new SolidBrush(Color.Violet);
             _bSolidBrush = new SolidBrush(Color.Blue);
@@ -102,31 +41,32 @@ namespace Demo.UI
 
         protected override void OnLoad(EventArgs e)
         {
-            //base.OnLoad(e);
-            //PMTText = this.Name;
-            this.orientedTextLabel1.Text = PMTText;
+            //this.orientedTextLabel1.Text = PMTText;
         }
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            if (String.IsNullOrEmpty(PMTText))
+            if (String.IsNullOrEmpty(ButtonText))
             {
-                PMTText = this.Name;
+                ButtonText = this.Name;
             }
+            float width = graphics.MeasureString(ButtonText, this.Font).Width;
+            float height = graphics.MeasureString(ButtonText, this.Font).Height;
+
             if (_Active)
             {
                 switch (_State)
                 {
-                    case States.Normal:
+                    case Summer.UI.Attribute.States.Normal:
                         graphics.FillRectangle(_solidBrush, _fillRect);
                         graphics.DrawRectangle(_pen, _innerRect);
                         break;
-                    case States.MouseOver:
+                    case Summer.UI.Attribute.States.MouseOver:
                         graphics.FillRectangle(_lightSolidBrush, _fillRect);
                         graphics.DrawRectangle(_pen, _innerRect);
                         break;
-                    case States.Clicked:
+                    case Summer.UI.Attribute.States.Clicked:
                         graphics.FillRectangle(_lightSolidBrush, _fillRect);
                         graphics.DrawRectangle(_clickPen, _innerRect);
                         break;
@@ -141,64 +81,46 @@ namespace Demo.UI
 
             graphics.FillRectangle(_rSolidBrush, _rRectangle);
             graphics.DrawRectangle(_rPen, _rRectangle);
+
+            //For rotation, who about rotation?
+            double angle = (_rotationAngle / 180) * Math.PI;
+            graphics.TranslateTransform(
+                (ClientRectangle.Width + (float)(height * Math.Sin(angle)) - (float)(width * Math.Cos(angle))) / 2,
+                (ClientRectangle.Height - (float)(height * Math.Cos(angle)) - (float)(width * Math.Sin(angle))) / 2 + 5);
+            graphics.RotateTransform((float)_rotationAngle);
+            graphics.DrawString(ButtonText, this.Font, _textBrush, 0, 0);
+            graphics.ResetTransform();
         }
 
         protected override void OnMouseLeave(System.EventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.Normal;
-                this.Invalidate();
-                base.OnMouseLeave(e);
-            }
+            base.OnMouseLeave(e);
         }
 
         protected override void OnMouseEnter(System.EventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.MouseOver;
-                this.Invalidate();
-                base.OnMouseEnter(e);
-            }
+            base.OnMouseEnter(e);
         }
 
         protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.MouseOver;
-                this.Invalidate();
-                base.OnMouseUp(e);
-            }
+            base.OnMouseUp(e);
         }
 
         protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.Clicked;
-                this.Invalidate();
-                base.OnMouseDown(e);
-            }
+            base.OnMouseDown(e);
         }
 
         protected override void OnClick(System.EventArgs e)
         {
-            // prevent click when button is inactive
-            if (_Active)
-            {
-                if (_State == States.Clicked)
-                {
-                    base.OnClick(e);
-                }
-            }
+            base.OnClick(e);
         }
 
 
         protected override void OnResize(EventArgs e)
         {
-            _fillRect = new Rectangle(0, 0, this.Width, this.Height);
+            base.OnResize(e);
         }
 
         protected override void Dispose(bool disposing)
@@ -212,12 +134,6 @@ namespace Demo.UI
                 _vPen.Dispose();
                 _bPen.Dispose();
                 _rPen.Dispose();
-                _clickPen.Dispose();
-
-                _solidBrush.Dispose();
-                _lightSolidBrush.Dispose();
-
-                _pen.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);

@@ -7,74 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Summer.UI.Button;
 
 namespace Demo.UI
 {
-    public partial class Filters : UserControl
+    public partial class Filters : BaseButton
     {
         public enum Orientation
         {
             Horizontal,
             Vertical
-        }
-
-        private enum States
-        {
-            Normal,
-            MouseOver,
-            Clicked
-        }
-
-        private Rectangle _fillRect;
-        private Rectangle _innerRect;
-        private Pen _pen, _clickPen;
-        private SolidBrush _lightSolidBrush, _solidBrush;
-
-        private double _rotationAngle;
-        [Description("Rotation Angle"), Category("Appearance")]
-        public double RotationAngle
-        {
-            get
-            {
-                return _rotationAngle;
-            }
-            set
-            {
-
-                _rotationAngle = value;
-                this.Invalidate();
-            }
-        }
-
-        private string _filterText;
-
-        [Description("Filter Display Text"), Category("Appearance")]
-        public string FilterText
-        {
-            get
-            {
-                return _filterText;
-            }
-            set
-            {
-                if (value != _filterText)
-                {
-                    _filterText = value;
-                    InvokeInvalidate(value);
-                    this.Invalidate();
-                }
-            }
-        }
-
-        private void InvokeInvalidate(string value)
-        {
-            if (!IsHandleCreated)
-                return;
-            try
-            {
-                this.Invoke((MethodInvoker)delegate { this.FilterText = value; });
-            }
-            catch { }
         }
 
         private Orientation _orientation;
@@ -110,52 +52,33 @@ namespace Demo.UI
             this.Invalidate();
         }
 
-        // default values
-        private bool _Active = true;
+        //private float _textWidth;
 
-        [Description("Enable the button?"), Category("Filters")]
-        public bool Active
-        {
-            get
-            {
-                return _Active;
-            }
-            set
-            {
-                _Active = value;
-                this.Invalidate();
-            }
-        }
+        //private float _textHeight;
 
-        private float _textWidth;
+        //public float TextWidth
+        //{
+        //    get
+        //    {
+        //        return this._textWidth;
+        //    }
+        //    set
+        //    {
+        //        this._textWidth = value;
+        //    }
+        //}
 
-        private float _textHeight;
-
-        public float TextWidth
-        {
-            get
-            {
-                return this._textWidth;
-            }
-            set
-            {
-                this._textWidth = value;
-            }
-        }
-
-        public float TextHeight
-        {
-            get
-            {
-                return this._textHeight;
-            }
-            set
-            {
-                this._textHeight = value;
-            }
-        }
-
-        private States _State = States.Normal;
+        //public float TextHeight
+        //{
+        //    get
+        //    {
+        //        return this._textHeight;
+        //    }
+        //    set
+        //    {
+        //        this._textHeight = value;
+        //    }
+        //}
 
         public Filters()
         {
@@ -194,54 +117,27 @@ namespace Demo.UI
 
         protected override void OnMouseLeave(System.EventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.Normal;
-                this.Invalidate();
-                base.OnMouseLeave(e);
-            }
+            base.OnMouseLeave(e);
         }
 
         protected override void OnMouseEnter(System.EventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.MouseOver;
-                this.Invalidate();
-                base.OnMouseEnter(e);
-            }
+            base.OnMouseEnter(e);
         }
 
         protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.MouseOver;
-                this.Invalidate();
-                base.OnMouseUp(e);
-            }
+            base.OnMouseUp(e);
         }
 
         protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
         {
-            if (_Active)
-            {
-                _State = States.Clicked;
-                this.Invalidate();
-                base.OnMouseDown(e);
-            }
+            base.OnMouseDown(e);
         }
 
         protected override void OnClick(System.EventArgs e)
         {
-            // prevent click when button is inactive
-            if (_Active)
-            {
-                if (_State == States.Clicked)
-                {
-                    base.OnClick(e);
-                }
-            }
+            base.OnClick(e);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -249,59 +145,58 @@ namespace Demo.UI
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
-            Brush textBrush = new SolidBrush(this.ForeColor);
+            //Brush textBrush = new SolidBrush(this.ForeColor);
 
-            //Getting the width and height of the text, which we are going to write
-            if (String.IsNullOrEmpty(FilterText))
-            {
-                FilterText = this.Name;
-            }
-            float width = graphics.MeasureString(FilterText, this.Font).Width;
-            float height = graphics.MeasureString(FilterText, this.Font).Height;
+            ////Getting the width and height of the text, which we are going to write
+            //if (String.IsNullOrEmpty(ButtonText))
+            //{
+            //    ButtonText = this.Name;
+            //}
+            //float width = graphics.MeasureString(ButtonText, this.Font).Width;
+            //float height = graphics.MeasureString(ButtonText, this.Font).Height;
 
             if (_Active)
             {
                 switch (_State)
                 {
-                    case States.Normal:
+                    case Summer.UI.Attribute.States.Normal:
                         graphics.FillRectangle(_solidBrush, _fillRect);
                         graphics.DrawRectangle(_pen, _innerRect);
                         break;
-                    case States.MouseOver:
+                    case Summer.UI.Attribute.States.MouseOver:
                         graphics.FillRectangle(_lightSolidBrush, _fillRect);
                         graphics.DrawRectangle(_pen, _innerRect);
                         break;
-                    case States.Clicked:
+                    case Summer.UI.Attribute.States.Clicked:
                         graphics.FillRectangle(_lightSolidBrush, _fillRect);
                         graphics.DrawRectangle(_clickPen, _innerRect);
                         break;
                 }
             }
-
-            switch (_orientation)
-            {
-                case Orientation.Horizontal:
-                    _textWidth = graphics.MeasureString(FilterText, this.Font).Width;
-                    _textHeight = graphics.MeasureString(FilterText, this.Font).Height;
-                    break;
-                case Orientation.Vertical:
-                    _textHeight = graphics.MeasureString(FilterText, this.Font).Width;
-                    _textWidth = graphics.MeasureString(FilterText, this.Font).Height;
-                    break;
-                default:
-                    _textHeight = graphics.MeasureString(FilterText, this.Font).Width;
-                    _textWidth = graphics.MeasureString(FilterText, this.Font).Height;
-                    break;
-            }
-
-            //For rotation, who about rotation?
-            double angle = (_rotationAngle / 180) * Math.PI;
-            graphics.TranslateTransform(
-                (ClientRectangle.Width + (float)(height * Math.Sin(angle)) - (float)(width * Math.Cos(angle))) / 2,
-                (ClientRectangle.Height - (float)(height * Math.Cos(angle)) - (float)(width * Math.Sin(angle))) / 2);
-            graphics.RotateTransform((float)_rotationAngle);
-            graphics.DrawString(FilterText, this.Font, textBrush, 0, 0);
-            graphics.ResetTransform();
+            base.OnPaint(e);
+            //switch (_orientation)
+            //{
+            //    case Orientation.Horizontal:
+            //        _textWidth = graphics.MeasureString(FilterText, this.Font).Width;
+            //        _textHeight = graphics.MeasureString(FilterText, this.Font).Height;
+            //        break;
+            //    case Orientation.Vertical:
+            //        _textHeight = graphics.MeasureString(FilterText, this.Font).Width;
+            //        _textWidth = graphics.MeasureString(FilterText, this.Font).Height;
+            //        break;
+            //    default:
+            //        _textHeight = graphics.MeasureString(FilterText, this.Font).Width;
+            //        _textWidth = graphics.MeasureString(FilterText, this.Font).Height;
+            //        break;
+            //}
+            ////For rotation, who about rotation?
+            //double angle = (_rotationAngle / 180) * Math.PI;
+            //graphics.TranslateTransform(
+            //    (ClientRectangle.Width + (float)(height * Math.Sin(angle)) - (float)(width * Math.Cos(angle))) / 2,
+            //    (ClientRectangle.Height - (float)(height * Math.Cos(angle)) - (float)(width * Math.Sin(angle))) / 2);
+            //graphics.RotateTransform((float)_rotationAngle);
+            //graphics.DrawString(ButtonText, this.Font, textBrush, 0, 0);
+            //graphics.ResetTransform();
         }
 
         protected override void OnResize(EventArgs e)
