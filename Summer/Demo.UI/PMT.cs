@@ -18,6 +18,7 @@ namespace Demo.UI
         private SolidBrush _vSolidBrush, _bSolidBrush, _rSolidBrush;
         private Rectangle _vRectangle, _bRectangle, _rRectangle;
 
+        private ToolStripMenuItem _toolStripMenuItem;
         //private States _State = States.Normal;
         public PMT() 
         {
@@ -37,6 +38,30 @@ namespace Demo.UI
             _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
             _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
 
+            if (components == null) components = new Container();
+            this.ContextMenuStrip = new ContextMenuStrip(components);
+            this.ContextMenuStrip.Opening += new CancelEventHandler(ContextMenuStrip_Opening);
+        }
+
+        void ContextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            var v1 = sender as PMT;
+            ContextMenuStrip menuStrip = sender as ContextMenuStrip;
+            if (menuStrip == null) return;
+            menuStrip.Items.Clear();
+            //ToolStripMenuItem tsi;
+            //tsi = new ToolStripMenuItem(Resources.StrPaste);
+
+            //tsi.Enabled = ((ReportForm)this.ParentForm).ReportOperateManage.CanBePaste(((ReportForm)this.ParentForm).Report.IsSpecimenReport);
+            //tsi.Click += new EventHandler(Paste);
+            _toolStripMenuItem = new ToolStripMenuItem();
+            _toolStripMenuItem.Name = "_toolStripMenuItem";
+            _toolStripMenuItem.Size = new Size(153, 22);
+            _toolStripMenuItem.Text = "None";
+            _toolStripMenuItem.CheckState = CheckState.Unchecked;
+            menuStrip.Items.Add(_toolStripMenuItem);
+
+            e.Cancel = false;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -120,7 +145,12 @@ namespace Demo.UI
 
         protected override void OnResize(EventArgs e)
         {
-            base.OnResize(e);
+            _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
+            _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
+            _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
+
+            _fillRect = new Rectangle(0, 0, this.Width, this.Height);
+            _innerRect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
         }
 
         protected override void Dispose(bool disposing)

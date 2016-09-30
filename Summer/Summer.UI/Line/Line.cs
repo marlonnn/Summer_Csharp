@@ -21,10 +21,24 @@ namespace Summer.UI.Line
         private Color _lineColor = Color.Black;
         private int _edgeOffset = 5;
         private float _opacity = 1.0f;
+        private bool _hasCap;
 
         #endregion
-
         #region Properties
+
+        [Description("wether has cap of line?"), Category("Line"), DefaultValue(true)]
+        public bool HasCap
+        {
+            get { return this._hasCap; }
+            set
+            {
+                if (value != _hasCap)
+                {
+                    _hasCap = value;
+                    InvokeInvalidate(value);
+                }
+            }
+        }
 
         [Browsable(false), Category("Layout"), Description("Start point of the line in control coordinates.")]
         public Point StartPoint
@@ -144,9 +158,19 @@ namespace Summer.UI.Line
 
         public Line()
         {
+            //this.SuspendLayout();
+            //// 
+            //// PMT
+            //// 
+            ////this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            ////this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ////this.Size = new System.Drawing.Size(60, 30);
+            //this.ResumeLayout(false);
+            //DoubleBuffered = true;
             _p1 = new Point(5, 5);
             _p2 = new Point(45, 45);
-            //DoubleBuffered = true;
+            this._hasCap = true;
+
         }
 
         #endregion
@@ -194,7 +218,7 @@ namespace Summer.UI.Line
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Color opacityColor = Color.FromArgb((int)(255 * _opacity), _lineColor);
             using (Pen p = new Pen(opacityColor, _penWidth))
@@ -202,7 +226,10 @@ namespace Summer.UI.Line
                 new AdjustableArrowCap(4, 4, true))
             {
                 // A triangle
-                p.CustomEndCap = lineCap;
+                if (HasCap)
+                {
+                    p.CustomEndCap = lineCap;
+                }
                 //p.EndCap = LineCap.ArrowAnchor;
                 e.Graphics.DrawLine(p, _p1, _p2);
             }
@@ -236,6 +263,17 @@ namespace Summer.UI.Line
             {
                 //RecreateHandle(); Invalidate();
                 this.Invoke((MethodInvoker)delegate { Parent.Invalidate(rect, true); });
+            }
+            catch { }
+        }
+
+        private void InvokeInvalidate(bool value)
+        {
+            if (!IsHandleCreated)
+                return;
+            try
+            {
+                this.Invoke((MethodInvoker)delegate { this._hasCap = value; });
             }
             catch { }
         }

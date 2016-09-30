@@ -135,10 +135,10 @@ namespace Summer.UI.Button
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.HighQuality;
 
-            if (String.IsNullOrEmpty(ButtonText))
-            {
-                ButtonText = this.Name;
-            }
+            //if (String.IsNullOrEmpty(ButtonText))
+            //{
+            //    ButtonText = this.Name;
+            //}
             float width = graphics.MeasureString(ButtonText, this.Font).Width;
             float height = graphics.MeasureString(ButtonText, this.Font).Height;
 

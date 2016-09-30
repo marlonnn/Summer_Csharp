@@ -2,7 +2,7 @@
 
 namespace Demo.UI
 {
-    partial class Spectroscope
+    partial class BaseLine
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -17,33 +17,20 @@ namespace Demo.UI
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
-            this.label1.TabIndex = 0;
-            // 
-            // Spectroscope
+            // BaseLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.ButtonText = "Spectroscopes";
-            this.Controls.Add(this.label1);
-            this.Name = "Spectroscope";
-            this.Size = new System.Drawing.Size(70, 70);
+            this.DoubleBuffered = true;
+            this.Name = "Line";
+            //this.BackColor = Color.Transparent;
+            //this.Size = new System.Drawing.Size(80, 8);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
     }
 }

@@ -52,34 +52,6 @@ namespace Demo.UI
             this.Invalidate();
         }
 
-        //private float _textWidth;
-
-        //private float _textHeight;
-
-        //public float TextWidth
-        //{
-        //    get
-        //    {
-        //        return this._textWidth;
-        //    }
-        //    set
-        //    {
-        //        this._textWidth = value;
-        //    }
-        //}
-
-        //public float TextHeight
-        //{
-        //    get
-        //    {
-        //        return this._textHeight;
-        //    }
-        //    set
-        //    {
-        //        this._textHeight = value;
-        //    }
-        //}
-
         public Filters()
         {
             InitializeComponent();
@@ -145,16 +117,6 @@ namespace Demo.UI
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
-            //Brush textBrush = new SolidBrush(this.ForeColor);
-
-            ////Getting the width and height of the text, which we are going to write
-            //if (String.IsNullOrEmpty(ButtonText))
-            //{
-            //    ButtonText = this.Name;
-            //}
-            //float width = graphics.MeasureString(ButtonText, this.Font).Width;
-            //float height = graphics.MeasureString(ButtonText, this.Font).Height;
-
             if (_Active)
             {
                 switch (_State)
@@ -174,29 +136,6 @@ namespace Demo.UI
                 }
             }
             base.OnPaint(e);
-            //switch (_orientation)
-            //{
-            //    case Orientation.Horizontal:
-            //        _textWidth = graphics.MeasureString(FilterText, this.Font).Width;
-            //        _textHeight = graphics.MeasureString(FilterText, this.Font).Height;
-            //        break;
-            //    case Orientation.Vertical:
-            //        _textHeight = graphics.MeasureString(FilterText, this.Font).Width;
-            //        _textWidth = graphics.MeasureString(FilterText, this.Font).Height;
-            //        break;
-            //    default:
-            //        _textHeight = graphics.MeasureString(FilterText, this.Font).Width;
-            //        _textWidth = graphics.MeasureString(FilterText, this.Font).Height;
-            //        break;
-            //}
-            ////For rotation, who about rotation?
-            //double angle = (_rotationAngle / 180) * Math.PI;
-            //graphics.TranslateTransform(
-            //    (ClientRectangle.Width + (float)(height * Math.Sin(angle)) - (float)(width * Math.Cos(angle))) / 2,
-            //    (ClientRectangle.Height - (float)(height * Math.Cos(angle)) - (float)(width * Math.Sin(angle))) / 2);
-            //graphics.RotateTransform((float)_rotationAngle);
-            //graphics.DrawString(ButtonText, this.Font, textBrush, 0, 0);
-            //graphics.ResetTransform();
         }
 
         protected override void OnResize(EventArgs e)

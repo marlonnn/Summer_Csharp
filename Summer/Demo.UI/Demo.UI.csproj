@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,17 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomPanel.cs">
+    <Compile Include="BaseLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomPanel.Designer.cs">
-      <DependentUpon>CustomPanel.cs</DependentUpon>
+    <Compile Include="BaseLine.Designer.cs">
+      <DependentUpon>BaseLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="DiagramPanel.cs">
+    <Compile Include="line2.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DiagramPanel.Designer.cs">
-      <DependentUpon>DiagramPanel.cs</DependentUpon>
+    <Compile Include="OptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanel.Designer.cs">
+      <DependentUpon>OptionPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Filters.cs">
       <SubType>UserControl</SubType>
@@ -76,12 +80,6 @@
     <Compile Include="LightCollectionOptics.Designer.cs">
       <DependentUpon>LightCollectionOptics.cs</DependentUpon>
     </Compile>
-    <Compile Include="LineTop.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="LineTop.Designer.cs">
-      <DependentUpon>LineTop.cs</DependentUpon>
-    </Compile>
     <Compile Include="PMT.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,35 +88,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spectro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Spectroscope.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Spectroscope.Designer.cs">
       <DependentUpon>Spectroscope.cs</DependentUpon>
     </Compile>
-    <Compile Include="SpectroscopeB.cs">
+    <Compile Include="TranspControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SpectroscopeB.Designer.cs">
-      <DependentUpon>SpectroscopeB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SpectroscopeA.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SpectroscopeA.Designer.cs">
-      <DependentUpon>SpectroscopeA.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ZstyleControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ZstyleControl.Designer.cs">
-      <DependentUpon>ZstyleControl.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="CustomPanel.resx">
-      <DependentUpon>CustomPanel.cs</DependentUpon>
+    <EmbeddedResource Include="BaseLine.resx">
+      <DependentUpon>BaseLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DiagramPanel.resx">
-      <DependentUpon>DiagramPanel.cs</DependentUpon>
+    <EmbeddedResource Include="OptionPanel.resx">
+      <DependentUpon>OptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -138,14 +124,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Spectro.resx">
+      <DependentUpon>Spectro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Spectroscope.resx">
       <DependentUpon>Spectroscope.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SpectroscopeA.resx">
-      <DependentUpon>SpectroscopeA.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SpectroscopeB.resx">
-      <DependentUpon>SpectroscopeB.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

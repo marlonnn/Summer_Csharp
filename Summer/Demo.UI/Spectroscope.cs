@@ -96,14 +96,6 @@ namespace Demo.UI
             base.OnLoad(e);
         }
 
-        public Shape ShapeType
-        {
-            set
-            {
-                this._shape = value;
-            }
-        }
-
         // Draw the new button. 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -162,22 +154,22 @@ namespace Demo.UI
             switch (shape)
             {
                 case Shape.TOP:
-                    point1 = new PointF(20, 20);
-                    point2 = new PointF(this.Width - 20, this.Width - 20);
-                    point3 = new PointF(this.Width - 20, this.Width * 7 / 8 - 20);
-                    point4 = new PointF(this.Width / 8 + 20, 20);
+                    point1 = new PointF(28, 28);
+                    point2 = new PointF(this.Width - 28, this.Width - 28);
+                    point3 = new PointF(this.Width - 28, this.Width * 7 / 8 - 28);
+                    point4 = new PointF(this.Width / 8 + 28, 28);
                     break;
                 case Shape.BOTTOM:
-                    point1 = new PointF(20, 20);
-                    point2 = new PointF(20, this.Width / 8 + 20);
-                    point3 = new PointF(this.Width * 7 / 8 - 20, this.Width - 20);
-                    point4 = new PointF(this.Width - 20, this.Width - 20);
+                    point1 = new PointF(28, 28);
+                    point2 = new PointF(28, this.Width / 8 + 28);
+                    point3 = new PointF(this.Width * 7 / 8 - 28, this.Width - 28);
+                    point4 = new PointF(this.Width - 28, this.Width - 28);
                     break;
                 default:
-                    point1 = new PointF(20, 20);
-                    point2 = new PointF(this.Width - 20, this.Width - 20);
-                    point3 = new PointF(this.Width - 20, this.Width * 7 / 8 - 20);
-                    point4 = new PointF(this.Width / 8 + 20, 20);
+                    point1 = new PointF(28, 28);
+                    point2 = new PointF(this.Width - 28, this.Width - 28);
+                    point3 = new PointF(this.Width - 28, this.Width * 7 / 8 - 28);
+                    point4 = new PointF(this.Width / 8 + 28, 28);
                     break;
             }
             PointF[] curvePoints =
@@ -222,6 +214,10 @@ namespace Demo.UI
 
         protected override void OnClick(System.EventArgs e)
         {
+            if (Program.MainForm.SpectroscopeHandler != null)
+            {
+                Program.MainForm.SpectroscopeHandler(this, e);
+            }
             base.OnClick(e);
         }
 

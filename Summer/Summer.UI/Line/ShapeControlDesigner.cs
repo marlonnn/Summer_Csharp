@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace Summer.UI.Line
 {
-    class ShapeControlDesigner : ControlDesigner
+    public class ShapeControlDesigner : ControlDesigner
     {
 
         #region Fields

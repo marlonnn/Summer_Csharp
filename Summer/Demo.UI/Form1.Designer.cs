@@ -31,14 +31,15 @@ namespace Demo.UI
         /// </summary>
         private void InitializeComponent()
         {
-            this.customPanel1 = new Demo.UI.CustomPanel();
+            this.customPanel1 = new Demo.UI.OptionPanel();
             this.SuspendLayout();
             // 
             // customPanel1
             // 
-            this.customPanel1.Location = new System.Drawing.Point(157, 85);
+            this.customPanel1.ForeColor = System.Drawing.Color.Transparent;
+            this.customPanel1.Location = new System.Drawing.Point(19, 52);
             this.customPanel1.Name = "customPanel1";
-            this.customPanel1.Size = new System.Drawing.Size(601, 449);
+            this.customPanel1.Size = new System.Drawing.Size(709, 456);
             this.customPanel1.TabIndex = 10;
             // 
             // Form1
@@ -56,7 +57,7 @@ namespace Demo.UI
         }
 
         #endregion
-        private CustomPanel customPanel1;
+        private OptionPanel customPanel1;
     }
 }
 
