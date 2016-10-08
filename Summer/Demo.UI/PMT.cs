@@ -14,6 +14,90 @@ namespace Demo.UI
 {
     public partial class PMT : BaseButton
     {
+        public enum Light
+        {
+            VLS,
+            BL4,
+            RL1,
+            VLS_BL4,
+            VLS_RL1,
+            BL4_RL1,
+            ALL,
+            SSC,
+        }
+
+        private Light _pmtLight;
+        [Description("Light of the PMT?"), Category("PMT"), DefaultValue(typeof(PMT), "ALL")]
+        public Light PMTLight
+        {
+            get
+            {
+                return this._pmtLight;
+            }
+            set
+            {
+                this._pmtLight = value;
+
+                SetLightRectangle();
+                InvokeInvalidate(value);
+                this.Invalidate();
+            }
+        }
+
+        private void SetLightRectangle()
+        {
+            switch (this._pmtLight)
+            {
+                case Light.VLS:
+                    _vRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
+                    this._btnText = "VLS";
+                    break;
+                case Light.BL4:
+                    _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
+                    this._btnText = "BL4";
+                    break;
+                case Light.RL1:
+                    _rRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
+                    this._btnText = "RL1";
+                    break;
+                case Light.VLS_BL4:
+                    _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
+                    _bRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
+                    this._btnText = "VLS BL4";
+                    break;
+                case Light.VLS_RL1:
+                    _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
+                    _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
+                    this._btnText = "VLS RL1";
+                    break;
+                case Light.BL4_RL1:
+                    _bRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
+                    _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
+                    this._btnText = "BL4 RL1";
+                    break;
+                case Light.ALL:
+                    _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
+                    _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
+                    _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
+                    this._btnText = "VLS BL4 RL1";
+                    break;
+                case Light.SSC:
+                    this._btnText = "SSC";
+                    break;
+            }
+        }
+
+        private void InvokeInvalidate(Light value)
+        {
+            if (!IsHandleCreated)
+                return;
+            try
+            {
+                this.Invoke((MethodInvoker)delegate { this._pmtLight = value; });
+            }
+            catch { }
+        }
+
         private Pen  _vPen, _bPen, _rPen;
         private SolidBrush _vSolidBrush, _bSolidBrush, _rSolidBrush;
         private Rectangle _vRectangle, _bRectangle, _rRectangle;
@@ -98,14 +182,57 @@ namespace Demo.UI
                 }
             }
 
-            graphics.FillRectangle(_bSolidBrush, _bRectangle);
-            graphics.DrawRectangle(_bPen, _bRectangle);
+            switch (this._pmtLight)
+            {
+                case Light.VLS:
+                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
+                    graphics.DrawRectangle(_vPen, _vRectangle);
+                    break;
+                case Light.BL4:
+                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
+                    graphics.DrawRectangle(_bPen, _bRectangle);
+                    break;
+                case Light.RL1:
+                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
+                    graphics.DrawRectangle(_rPen, _rRectangle);
+                    break;
+                case Light.VLS_BL4:
+                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
+                    graphics.DrawRectangle(_vPen, _vRectangle);
+                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
+                    graphics.DrawRectangle(_bPen, _bRectangle);
+                    break;
+                case Light.VLS_RL1:
+                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
+                    graphics.DrawRectangle(_vPen, _vRectangle);
+                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
+                    graphics.DrawRectangle(_rPen, _rRectangle);
+                    break;
+                case Light.BL4_RL1:
+                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
+                    graphics.DrawRectangle(_bPen, _bRectangle);
+                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
+                    graphics.DrawRectangle(_rPen, _rRectangle);
+                    break;
+                case Light.ALL:
+                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
+                    graphics.DrawRectangle(_vPen, _vRectangle);
+                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
+                    graphics.DrawRectangle(_bPen, _bRectangle);
+                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
+                    graphics.DrawRectangle(_rPen, _rRectangle);
+                    break;
+                case Light.SSC:
+                    break;
+            }
+            //graphics.FillRectangle(_bSolidBrush, _bRectangle);
+            //graphics.DrawRectangle(_bPen, _bRectangle);
 
-            graphics.FillRectangle(_vSolidBrush, _vRectangle);
-            graphics.DrawRectangle(_vPen, _vRectangle);
+            //graphics.FillRectangle(_vSolidBrush, _vRectangle);
+            //graphics.DrawRectangle(_vPen, _vRectangle);
 
-            graphics.FillRectangle(_rSolidBrush, _rRectangle);
-            graphics.DrawRectangle(_rPen, _rRectangle);
+            //graphics.FillRectangle(_rSolidBrush, _rRectangle);
+            //graphics.DrawRectangle(_rPen, _rRectangle);
 
             //For rotation, who about rotation?
             double angle = (_rotationAngle / 180) * Math.PI;

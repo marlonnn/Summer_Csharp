@@ -51,7 +51,6 @@ namespace Demo.UI
             this.line5 = new Summer.UI.Line.Line();
             this.line7 = new Summer.UI.Line.Line();
             this.line1 = new Summer.UI.Line.Line();
-            this.spectro1 = new Demo.UI.Spectro();
             this.filters6 = new Demo.UI.Filters();
             this.filters5 = new Demo.UI.Filters();
             this.lightCollectionOptics1 = new Demo.UI.LightCollectionOptics();
@@ -274,24 +273,6 @@ namespace Demo.UI
             this.line1.StartPoint = new System.Drawing.Point(63, 5);
             this.line1.TabIndex = 54;
             // 
-            // spectro1
-            // 
-            this.spectro1.Active = true;
-            this.spectro1.BackColor = System.Drawing.Color.Transparent;
-            this.spectro1.BackImage = null;
-            this.spectro1.ButtonText = "123456";
-            this.spectro1.FillColor = System.Drawing.Color.White;
-            this.spectro1.GlassColor = System.Drawing.Color.Transparent;
-            this.spectro1.GlassMode = true;
-            this.spectro1.LineWidth = 2;
-            this.spectro1.Location = new System.Drawing.Point(399, 216);
-            this.spectro1.Name = "spectro1";
-            this.spectro1.Opacity = 100;
-            this.spectro1.Size = new System.Drawing.Size(85, 85);
-            this.spectro1.SpectrosShape = Demo.UI.Spectro.Shape.BOTTOM;
-            this.spectro1.TabIndex = 63;
-            this.spectro1.TranspKey = System.Drawing.Color.White;
-            // 
             // filters6
             // 
             this.filters6.Active = true;
@@ -363,6 +344,7 @@ namespace Demo.UI
             this.pmt6.ButtonText = "pmt6";
             this.pmt6.Location = new System.Drawing.Point(73, 263);
             this.pmt6.Name = "pmt6";
+            this.pmt6.PMTLight = Demo.UI.PMT.Light.VLS;
             this.pmt6.Size = new System.Drawing.Size(60, 30);
             this.pmt6.TabIndex = 42;
             // 
@@ -372,6 +354,7 @@ namespace Demo.UI
             this.pmt5.ButtonText = "pmt5";
             this.pmt5.Location = new System.Drawing.Point(200, 0);
             this.pmt5.Name = "pmt5";
+            this.pmt5.PMTLight = Demo.UI.PMT.Light.VLS;
             this.pmt5.Size = new System.Drawing.Size(60, 30);
             this.pmt5.TabIndex = 42;
             // 
@@ -381,6 +364,7 @@ namespace Demo.UI
             this.pmt4.ButtonText = "pmt4";
             this.pmt4.Location = new System.Drawing.Point(147, 320);
             this.pmt4.Name = "pmt4";
+            this.pmt4.PMTLight = Demo.UI.PMT.Light.VLS;
             this.pmt4.Size = new System.Drawing.Size(60, 30);
             this.pmt4.TabIndex = 42;
             // 
@@ -390,6 +374,7 @@ namespace Demo.UI
             this.pmt3.ButtonText = "pmt3";
             this.pmt3.Location = new System.Drawing.Point(340, 86);
             this.pmt3.Name = "pmt3";
+            this.pmt3.PMTLight = Demo.UI.PMT.Light.VLS;
             this.pmt3.Size = new System.Drawing.Size(60, 30);
             this.pmt3.TabIndex = 42;
             // 
@@ -399,6 +384,7 @@ namespace Demo.UI
             this.pmt2.ButtonText = "pmt2";
             this.pmt2.Location = new System.Drawing.Point(260, 35);
             this.pmt2.Name = "pmt2";
+            this.pmt2.PMTLight = Demo.UI.PMT.Light.VLS;
             this.pmt2.Size = new System.Drawing.Size(60, 30);
             this.pmt2.TabIndex = 42;
             // 
@@ -408,6 +394,7 @@ namespace Demo.UI
             this.pmt1.ButtonText = "pmt1";
             this.pmt1.Location = new System.Drawing.Point(22, 200);
             this.pmt1.Name = "pmt1";
+            this.pmt1.PMTLight = Demo.UI.PMT.Light.VLS;
             this.pmt1.Size = new System.Drawing.Size(60, 30);
             this.pmt1.TabIndex = 42;
             // 
@@ -495,7 +482,6 @@ namespace Demo.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.spectro1);
             this.Controls.Add(this.line44);
             this.Controls.Add(this.line13);
             this.Controls.Add(this.line12);
@@ -585,6 +571,5 @@ namespace Demo.UI
         private Line line14;
         private Line line15;
         private Line line16;
-        private Spectro spectro1;
     }
 }

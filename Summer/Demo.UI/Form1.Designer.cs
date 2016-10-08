@@ -31,8 +31,20 @@ namespace Demo.UI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.pmt1 = new Demo.UI.PMT();
             this.customPanel1 = new Demo.UI.OptionPanel();
             this.SuspendLayout();
+            // 
+            // pmt1
+            // 
+            this.pmt1.Active = true;
+            this.pmt1.ButtonText = "VLS BL4 RL1";
+            this.pmt1.Location = new System.Drawing.Point(186, 412);
+            this.pmt1.Name = "pmt1";
+            this.pmt1.PMTLight = Demo.UI.PMT.Light.ALL;
+            this.pmt1.Size = new System.Drawing.Size(60, 30);
+            this.pmt1.TabIndex = 11;
             // 
             // customPanel1
             // 
@@ -47,6 +59,7 @@ namespace Demo.UI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 663);
+            this.Controls.Add(this.pmt1);
             this.Controls.Add(this.customPanel1);
             this.DoubleBuffered = true;
             this.Name = "Form1";
@@ -58,6 +71,7 @@ namespace Demo.UI
 
         #endregion
         private OptionPanel customPanel1;
+        private PMT pmt1;
     }
 }
 
