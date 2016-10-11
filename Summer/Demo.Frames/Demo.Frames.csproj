@@ -60,6 +60,12 @@
     <Compile Include="MediaPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SnapShots.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SnapShots.designer.cs">
+      <DependentUpon>SnapShots.cs</DependentUpon>
+    </Compile>
     <Compile Include="VideoFiles.cs" />
     <Compile Include="VideoListView.cs">
       <SubType>Component</SubType>
@@ -79,6 +85,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SnapShots.resx">
+      <DependentUpon>SnapShots.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VideoListView.resx">
       <DependentUpon>VideoListView.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +105,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="frame.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Lib\DirectShowLib-2005.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

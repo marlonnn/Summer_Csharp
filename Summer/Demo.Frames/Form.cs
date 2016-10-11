@@ -19,6 +19,8 @@ namespace Demo.Frames
 
         private static List<VideoFiles> videoFilesList = new List<VideoFiles>();
 
+        private MediaPlayer mediaPlayer;
+
         public Form()
         {
             InitializeComponent();
@@ -48,16 +50,19 @@ namespace Demo.Frames
                 return;
             try
             {
-                MediaPlayer newVideo = new MediaPlayer(this.openFileDialog.FileName);
+                mediaPlayer = new MediaPlayer(this.openFileDialog.FileName);
 
                 //if (!this.mediaManager.videos.Contains(this.openFileDialog.FileName))
                 {
                     double fps = 0;
                     double duration = 0;
-                    fps = newVideo.getFramePerSecond();
-                    duration = newVideo.getDuration();
+                    fps = mediaPlayer.getFramePerSecond();
+                    duration = mediaPlayer.getDuration();
                     int i = videoFilesList.Count;
-                    newVideo.LoadSnapShots();
+                    mediaPlayer.LoadSnapShots();
+                    var v = mediaPlayer.segmentationImages;
+
+                    this.ReloadInfo();
 
                     videoFilesList.Add(new VideoFiles(fileInfo.Name, fileInfo.FullName, 0, fps, duration));
                     this.videoListView1.LoadBinItem(videoFilesList);
@@ -70,6 +75,49 @@ namespace Demo.Frames
             {
                 MessageBox.Show("Failed to load video: " + comex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void ReloadInfo()
+        {
+            this.snapShots1.Clear();
+            int i = 0;
+            PictureBox box;
+            //if (this.mediaManager.currentMedia != null)
+            {
+                List<Frames> list = mediaPlayer.segmentationImages;
+                ShowInfo();
+                //this.images = list;
+                //if (this.mediaManager.currentMedia.fileType == MediaPlayer.FileType.Video)
+                {
+                    this.snapShots1.LoadFrames(list);
+                }
+            }
+        }
+
+        private void ShowInfo()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("FilePath: ");
+            sb.Append(mediaPlayer.mediaInfo.sFilePath);
+            sb.Append("\r\n");
+
+            sb.Append("Duration: ");
+            sb.Append(mediaPlayer.mediaInfo.duration.ToString());
+            sb.Append("\r\n");
+
+            sb.Append("FPS: ");
+            sb.Append(mediaPlayer.mediaInfo.fps.ToString());
+            sb.Append("\r\n");
+
+            sb.Append("Height: ");
+            sb.Append(mediaPlayer.mediaInfo.MediaHeight.ToString());
+            sb.Append("\r\n");
+
+            sb.Append("Width: ");
+            sb.Append(mediaPlayer.mediaInfo.MediaWidth.ToString());
+            sb.Append("\r\n");
+
+            lblInfo.Text = sb.ToString();
         }
 
         private bool CheckExtension(FileInfo f)
@@ -91,6 +139,21 @@ namespace Demo.Frames
             if (f.Extension.StartsWith(".m4v"))
                 return true;
             return false;
+        }
+
+        private void Form_Closing(object sender, FormClosingEventArgs e)
+        {
+            this.snapShots1.Clear();
+
+            System.Threading.Thread t = new System.Threading.Thread(delegate ()
+            {
+                Environment.Exit(1);
+            });
+            t.Start();
+            t.Join();
+
+            System.Windows.Forms.Application.Exit();
+            System.Environment.Exit(0);
         }
     }
 }
