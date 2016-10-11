@@ -344,8 +344,7 @@ namespace Demo.UI
             this.pmt6.ButtonText = "pmt6";
             this.pmt6.Location = new System.Drawing.Point(73, 263);
             this.pmt6.Name = "pmt6";
-            this.pmt6.PMTLight = Demo.UI.PMT.Light.VLS;
-            this.pmt6.Size = new System.Drawing.Size(60, 30);
+            this.pmt6.Size = new System.Drawing.Size(72, 30);
             this.pmt6.TabIndex = 42;
             // 
             // pmt5
@@ -354,8 +353,7 @@ namespace Demo.UI
             this.pmt5.ButtonText = "pmt5";
             this.pmt5.Location = new System.Drawing.Point(200, 0);
             this.pmt5.Name = "pmt5";
-            this.pmt5.PMTLight = Demo.UI.PMT.Light.VLS;
-            this.pmt5.Size = new System.Drawing.Size(60, 30);
+            this.pmt5.Size = new System.Drawing.Size(72, 30);
             this.pmt5.TabIndex = 42;
             // 
             // pmt4
@@ -364,8 +362,7 @@ namespace Demo.UI
             this.pmt4.ButtonText = "pmt4";
             this.pmt4.Location = new System.Drawing.Point(147, 320);
             this.pmt4.Name = "pmt4";
-            this.pmt4.PMTLight = Demo.UI.PMT.Light.VLS;
-            this.pmt4.Size = new System.Drawing.Size(60, 30);
+            this.pmt4.Size = new System.Drawing.Size(72, 30);
             this.pmt4.TabIndex = 42;
             // 
             // pmt3
@@ -374,8 +371,7 @@ namespace Demo.UI
             this.pmt3.ButtonText = "pmt3";
             this.pmt3.Location = new System.Drawing.Point(340, 86);
             this.pmt3.Name = "pmt3";
-            this.pmt3.PMTLight = Demo.UI.PMT.Light.VLS;
-            this.pmt3.Size = new System.Drawing.Size(60, 30);
+            this.pmt3.Size = new System.Drawing.Size(72, 30);
             this.pmt3.TabIndex = 42;
             // 
             // pmt2
@@ -384,8 +380,7 @@ namespace Demo.UI
             this.pmt2.ButtonText = "pmt2";
             this.pmt2.Location = new System.Drawing.Point(260, 35);
             this.pmt2.Name = "pmt2";
-            this.pmt2.PMTLight = Demo.UI.PMT.Light.VLS;
-            this.pmt2.Size = new System.Drawing.Size(60, 30);
+            this.pmt2.Size = new System.Drawing.Size(72, 30);
             this.pmt2.TabIndex = 42;
             // 
             // pmt1
@@ -394,8 +389,7 @@ namespace Demo.UI
             this.pmt1.ButtonText = "pmt1";
             this.pmt1.Location = new System.Drawing.Point(22, 200);
             this.pmt1.Name = "pmt1";
-            this.pmt1.PMTLight = Demo.UI.PMT.Light.VLS;
-            this.pmt1.Size = new System.Drawing.Size(60, 30);
+            this.pmt1.Size = new System.Drawing.Size(72, 30);
             this.pmt1.TabIndex = 42;
             // 
             // spectroscope1

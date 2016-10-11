@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB80B12F-A75C-46BE-840E-417B49E126D9}</ProjectGuid>
+    <ProjectGuid>{6B0DABCD-BAF4-4A6C-945F-088592EF8E0D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.UI</RootNamespace>
-    <AssemblyName>Demo.UI</AssemblyName>
+    <RootNamespace>Demo.Frames</RootNamespace>
+    <AssemblyName>Demo.Frames</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Demo\UI\</OutputPath>
+    <OutputPath>..\bin\Debug\Demo\Frames\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,9 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\DirectShowLib-2005.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,85 +50,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseLine.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="BaseLine.Designer.cs">
-      <DependentUpon>BaseLine.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Light.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="line2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="OptionPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OptionPanel.Designer.cs">
-      <DependentUpon>OptionPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Filters.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Filters.Designer.cs">
-      <DependentUpon>Filters.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Form.Designer.cs">
+      <DependentUpon>Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="LightCollectionOptics.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="LightCollectionOptics.Designer.cs">
-      <DependentUpon>LightCollectionOptics.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PMT_back.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PMT_back.Designer.cs">
-      <DependentUpon>PMT_back.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PMT.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PMT.Designer.cs">
-      <DependentUpon>PMT.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Frames.cs" />
+    <Compile Include="MediaPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spectro.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="VideoFiles.cs" />
+    <Compile Include="VideoListView.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Spectroscope.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="VideoListView.Designer.cs">
+      <DependentUpon>VideoListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Spectroscope.Designer.cs">
-      <DependentUpon>Spectroscope.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TranspControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <EmbeddedResource Include="BaseLine.resx">
-      <DependentUpon>BaseLine.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OptionPanel.resx">
-      <DependentUpon>OptionPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LightCollectionOptics.resx">
-      <DependentUpon>LightCollectionOptics.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PMT_back.resx">
-      <DependentUpon>PMT_back.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PMT.resx">
-      <DependentUpon>PMT.cs</DependentUpon>
+    <EmbeddedResource Include="Form.resx">
+      <DependentUpon>Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,11 +79,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Spectro.resx">
-      <DependentUpon>Spectro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Spectroscope.resx">
-      <DependentUpon>Spectroscope.cs</DependentUpon>
+    <EmbeddedResource Include="VideoListView.resx">
+      <DependentUpon>VideoListView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -156,10 +96,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Summer.UI\Summer.UI.csproj">
-      <Project>{052319c6-e01f-4b28-969b-b9101878f67a}</Project>
-      <Name>Summer.UI</Name>
-    </ProjectReference>
+    <Content Include="Lib\DirectShowLib-2005.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

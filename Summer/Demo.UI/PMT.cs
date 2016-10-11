@@ -14,93 +14,7 @@ namespace Demo.UI
 {
     public partial class PMT : BaseButton
     {
-        public enum Light
-        {
-            VLS,
-            BL4,
-            RL1,
-            VLS_BL4,
-            VLS_RL1,
-            BL4_RL1,
-            ALL,
-            SSC,
-        }
-
-        private Light _pmtLight;
-        [Description("Light of the PMT?"), Category("PMT"), DefaultValue(typeof(PMT), "ALL")]
-        public Light PMTLight
-        {
-            get
-            {
-                return this._pmtLight;
-            }
-            set
-            {
-                this._pmtLight = value;
-
-                SetLightRectangle();
-                InvokeInvalidate(value);
-                this.Invalidate();
-            }
-        }
-
-        private void SetLightRectangle()
-        {
-            switch (this._pmtLight)
-            {
-                case Light.VLS:
-                    _vRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
-                    this._btnText = "VLS";
-                    break;
-                case Light.BL4:
-                    _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
-                    this._btnText = "BL4";
-                    break;
-                case Light.RL1:
-                    _rRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
-                    this._btnText = "RL1";
-                    break;
-                case Light.VLS_BL4:
-                    _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
-                    _bRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
-                    this._btnText = "VLS BL4";
-                    break;
-                case Light.VLS_RL1:
-                    _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
-                    _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
-                    this._btnText = "VLS RL1";
-                    break;
-                case Light.BL4_RL1:
-                    _bRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
-                    _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
-                    this._btnText = "BL4 RL1";
-                    break;
-                case Light.ALL:
-                    _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
-                    _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
-                    _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
-                    this._btnText = "VLS BL4 RL1";
-                    break;
-                case Light.SSC:
-                    this._btnText = "SSC";
-                    break;
-            }
-        }
-
-        private void InvokeInvalidate(Light value)
-        {
-            if (!IsHandleCreated)
-                return;
-            try
-            {
-                this.Invoke((MethodInvoker)delegate { this._pmtLight = value; });
-            }
-            catch { }
-        }
-
-        private Pen  _vPen, _bPen, _rPen;
-        private SolidBrush _vSolidBrush, _bSolidBrush, _rSolidBrush;
-        private Rectangle _vRectangle, _bRectangle, _rRectangle;
+        private Font _font;
 
         private ToolStripMenuItem _toolStripMenuItem;
         //private States _State = States.Normal;
@@ -108,19 +22,9 @@ namespace Demo.UI
         {
             InitializeComponent();
 
-            _vPen = new Pen(Color.Violet, 1);
-            _bPen = new Pen(Color.Blue, 1);
-            _rPen = new Pen(Color.Red, 1);
+            _font = new Font(FontFamily.GenericSansSerif, 7, FontStyle.Regular);
 
             _solidBrush = new SolidBrush(Color.LightSkyBlue);
-
-            _vSolidBrush = new SolidBrush(Color.Violet);
-            _bSolidBrush = new SolidBrush(Color.Blue);
-            _rSolidBrush = new SolidBrush(Color.Red);
-
-            _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
-            _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
-            _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
 
             if (components == null) components = new Container();
             this.ContextMenuStrip = new ContextMenuStrip(components);
@@ -134,10 +38,6 @@ namespace Demo.UI
             if (menuStrip == null) return;
             menuStrip.Items.Clear();
             //ToolStripMenuItem tsi;
-            //tsi = new ToolStripMenuItem(Resources.StrPaste);
-
-            //tsi.Enabled = ((ReportForm)this.ParentForm).ReportOperateManage.CanBePaste(((ReportForm)this.ParentForm).Report.IsSpecimenReport);
-            //tsi.Click += new EventHandler(Paste);
             _toolStripMenuItem = new ToolStripMenuItem();
             _toolStripMenuItem.Name = "_toolStripMenuItem";
             _toolStripMenuItem.Size = new Size(153, 22);
@@ -156,10 +56,6 @@ namespace Demo.UI
         {
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            if (String.IsNullOrEmpty(ButtonText))
-            {
-                ButtonText = this.Name;
-            }
             float width = graphics.MeasureString(ButtonText, this.Font).Width;
             float height = graphics.MeasureString(ButtonText, this.Font).Height;
 
@@ -181,67 +77,6 @@ namespace Demo.UI
                         break;
                 }
             }
-
-            switch (this._pmtLight)
-            {
-                case Light.VLS:
-                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
-                    graphics.DrawRectangle(_vPen, _vRectangle);
-                    break;
-                case Light.BL4:
-                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
-                    graphics.DrawRectangle(_bPen, _bRectangle);
-                    break;
-                case Light.RL1:
-                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
-                    graphics.DrawRectangle(_rPen, _rRectangle);
-                    break;
-                case Light.VLS_BL4:
-                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
-                    graphics.DrawRectangle(_vPen, _vRectangle);
-                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
-                    graphics.DrawRectangle(_bPen, _bRectangle);
-                    break;
-                case Light.VLS_RL1:
-                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
-                    graphics.DrawRectangle(_vPen, _vRectangle);
-                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
-                    graphics.DrawRectangle(_rPen, _rRectangle);
-                    break;
-                case Light.BL4_RL1:
-                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
-                    graphics.DrawRectangle(_bPen, _bRectangle);
-                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
-                    graphics.DrawRectangle(_rPen, _rRectangle);
-                    break;
-                case Light.ALL:
-                    graphics.FillRectangle(_vSolidBrush, _vRectangle);
-                    graphics.DrawRectangle(_vPen, _vRectangle);
-                    graphics.FillRectangle(_bSolidBrush, _bRectangle);
-                    graphics.DrawRectangle(_bPen, _bRectangle);
-                    graphics.FillRectangle(_rSolidBrush, _rRectangle);
-                    graphics.DrawRectangle(_rPen, _rRectangle);
-                    break;
-                case Light.SSC:
-                    break;
-            }
-            //graphics.FillRectangle(_bSolidBrush, _bRectangle);
-            //graphics.DrawRectangle(_bPen, _bRectangle);
-
-            //graphics.FillRectangle(_vSolidBrush, _vRectangle);
-            //graphics.DrawRectangle(_vPen, _vRectangle);
-
-            //graphics.FillRectangle(_rSolidBrush, _rRectangle);
-            //graphics.DrawRectangle(_rPen, _rRectangle);
-
-            //For rotation, who about rotation?
-            double angle = (_rotationAngle / 180) * Math.PI;
-            graphics.TranslateTransform(
-                (ClientRectangle.Width + (float)(height * Math.Sin(angle)) - (float)(width * Math.Cos(angle))) / 2,
-                (ClientRectangle.Height - (float)(height * Math.Cos(angle)) - (float)(width * Math.Sin(angle))) / 2 + 5);
-            graphics.RotateTransform((float)_rotationAngle);
-            graphics.DrawString(ButtonText, this.Font, _textBrush, 0, 0);
-            graphics.ResetTransform();
         }
 
         protected override void OnMouseLeave(System.EventArgs e)
@@ -272,10 +107,6 @@ namespace Demo.UI
 
         protected override void OnResize(EventArgs e)
         {
-            _vRectangle = new Rectangle(this.Width / 2 - 20, 5, 5, 5);
-            _bRectangle = new Rectangle(this.Width / 2 - 5, 5, 5, 5);
-            _rRectangle = new Rectangle(this.Width / 2 + 10, 5, 5, 5);
-
             _fillRect = new Rectangle(0, 0, this.Width, this.Height);
             _innerRect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
         }
@@ -284,13 +115,6 @@ namespace Demo.UI
         {
             if (disposing && (components != null))
             {
-                _vSolidBrush.Dispose();
-                _bSolidBrush.Dispose();
-                _rSolidBrush.Dispose();
-
-                _vPen.Dispose();
-                _bPen.Dispose();
-                _rPen.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);
