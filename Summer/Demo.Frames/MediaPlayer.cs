@@ -92,18 +92,18 @@ namespace VideoEditor
 
         public void LoadSnapShots()
         {
-            double interval = 1;
+            double interval = 0;
             double fps = 0;
             double duration = 0;
             fps = this.getFramePerSecond();
             duration = this.getDuration();
 
-            if (duration < 101)
-                interval = 1;
+            //if (duration < 101)
+            //    interval = 1;
 
-            if (duration > 100)
-                interval = duration / 100;
-
+            //if (duration > 100)
+            //    interval = duration / 100;
+            interval = 1 / fps;
             List<Frames> list = new List<Frames>();
             if (fileType == FileType.Video)
             {

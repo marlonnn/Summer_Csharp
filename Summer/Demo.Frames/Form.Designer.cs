@@ -35,13 +35,14 @@
             this.snapShots1 = new Demo.Frames.SnapShots();
             this.videoListView1 = new Demo.Frames.VideoListView();
             this.btnSave = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(35, 316);
+            this.btnAdd.Location = new System.Drawing.Point(35, 342);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 21);
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -49,18 +50,18 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(175, 316);
+            this.btnRemove.Location = new System.Drawing.Point(175, 342);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 21);
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 2;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             // 
             // lblInfo
             // 
-            this.lblInfo.Location = new System.Drawing.Point(272, 21);
+            this.lblInfo.Location = new System.Drawing.Point(272, 23);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(362, 289);
+            this.lblInfo.Size = new System.Drawing.Size(362, 313);
             this.lblInfo.TabIndex = 5;
             // 
             // snapShots1
@@ -68,18 +69,18 @@
             this.snapShots1.AutoScroll = true;
             this.snapShots1.BackColor = System.Drawing.Color.LightGray;
             this.snapShots1.HorizontalMode = true;
-            this.snapShots1.Location = new System.Drawing.Point(1, 400);
+            this.snapShots1.Location = new System.Drawing.Point(1, 433);
             this.snapShots1.Name = "snapShots1";
-            this.snapShots1.Size = new System.Drawing.Size(846, 120);
+            this.snapShots1.Size = new System.Drawing.Size(846, 130);
             this.snapShots1.TabIndex = 4;
             this.snapShots1.Text = "snapShots1";
             // 
             // videoListView1
             // 
             this.videoListView1.FullRowSelect = true;
-            this.videoListView1.Location = new System.Drawing.Point(35, 21);
+            this.videoListView1.Location = new System.Drawing.Point(35, 23);
             this.videoListView1.Name = "videoListView1";
-            this.videoListView1.Size = new System.Drawing.Size(215, 289);
+            this.videoListView1.Size = new System.Drawing.Size(215, 313);
             this.videoListView1.TabIndex = 3;
             this.videoListView1.ThumbBorderColor = System.Drawing.Color.Black;
             this.videoListView1.ThumbNailSize = 32;
@@ -88,18 +89,27 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(298, 316);
+            this.btnSave.Location = new System.Drawing.Point(298, 342);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(99, 23);
+            this.btnSave.Size = new System.Drawing.Size(99, 25);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save Frames";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(413, 342);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(221, 23);
+            this.progressBar.TabIndex = 7;
             // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 661);
+            this.ClientSize = new System.Drawing.Size(849, 716);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.snapShots1);
@@ -121,6 +131,7 @@
         private SnapShots snapShots1;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

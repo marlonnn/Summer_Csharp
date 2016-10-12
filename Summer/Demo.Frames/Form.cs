@@ -21,10 +21,63 @@ namespace Demo.Frames
 
         private MediaPlayer mediaPlayer;
 
+        private string basePath;
+
+        private BackgroundWorker _saveFramesTask;
+
         public Form()
         {
             InitializeComponent();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+
+            _saveFramesTask = new BackgroundWorker();
+            _saveFramesTask.WorkerReportsProgress = true;
+            _saveFramesTask.WorkerSupportsCancellation = true;
+            _saveFramesTask.DoWork += SaveFramesTask_DoWork;
+            _saveFramesTask.ProgressChanged += SaveFramesTask_ProgressChanged;
+            _saveFramesTask.RunWorkerCompleted += SaveFramesTask_RunWorkerCompleted;
+        }
+
+        private void SaveFramesTask_DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<Frames> list = mediaPlayer.segmentationImages;
+            if (list != null && list.Count > 0)
+            {
+                for (int i=0; i< list.Count; i++)
+                {
+                    if (_saveFramesTask.CancellationPending == true)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    try
+                    {
+                        using (Bitmap bitmap = new Bitmap(list[i].Image))
+                        {
+                            bitmap.Save(string.Format("{0}\\{1}.png", basePath, i));
+                        }
+                    }
+                    catch (Exception ee)
+                    {
+                    }
+                    _saveFramesTask.ReportProgress(100 * (i + 1) / list.Count);
+                }
+            }
+        }
+
+        private void SaveFramesTask_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void SaveFramesTask_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.progressBar.Value = 100;
+            if (e.Cancelled)
+            {
+                return;
+            }
+            MessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -154,6 +207,32 @@ namespace Demo.Frames
 
             System.Windows.Forms.Application.Exit();
             System.Environment.Exit(0);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            PerformSave();
+        }
+
+        private void PerformSave()
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                dialog.Description = "请选择将要保存帧图的文件路径";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    basePath = dialog.SelectedPath;
+                    SaveFrames();
+                }
+            }
+        }
+
+        private void SaveFrames()
+        {
+            if (!_saveFramesTask.IsBusy)
+            {
+                _saveFramesTask.RunWorkerAsync();
+            }
         }
     }
 }
