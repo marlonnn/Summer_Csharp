@@ -9,15 +9,41 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Demo.Animation
 {
+    public class Frame
+    {
+        private Bitmap _bimap;
+        private String _name;
+        private int _frameName;
+
+        public Bitmap Bitmap { get { return this._bimap; } }
+
+        public int FrameName { get { return this._frameName; } }
+        public Frame(Bitmap bimap, String name)
+        {
+            this._bimap = bimap;
+            this._name = name;
+            try
+            {
+                this._frameName = Int32.Parse(name);
+            }
+            catch (Exception e)
+            {
+                this._frameName = 0;
+            }
+        }
+    }
+
     public partial class Form : System.Windows.Forms.Form
     {
         // The frame images.
-        private Bitmap[] Frames;
+        //private Bitmap[] Frames;
+        private List<Frame> Frames;
 
         // The index of the current frame.
         private int FrameNum = 0;
@@ -38,15 +64,17 @@ namespace Demo.Animation
             string[] filter = new string[] { ".png" };
             FileInfo[] fileInfos = GetFileInfo(fileFolder, filter);
             // Load the frames.
-            Frames = new Bitmap[fileInfos.Length];
-
-            for (int i = 0; i < Frames.Length; i++)
+            //Frames = new Bitmap[fileInfos.Length];
+            Frames = new List<Frame>();
+            for (int i = 0; i < fileInfos.Length; i++)
             {
-                Frames[i] = new Bitmap(fileInfos[i].FullName);
+                string fileName = System.IO.Path.GetFileNameWithoutExtension(fileInfos[i].FullName);
+                Frame frame = new Frame(new Bitmap(fileInfos[i].FullName), fileName);
+                Frames.Add(frame);
             }
-
+            Frames.Sort((f1, f2) => f1.FrameName.CompareTo(f2.FrameName));
             // Display the first frame.
-            picFrame.Image = Frames[FrameNum];
+            picFrame.Image = Frames[FrameNum].Bitmap;
 
             // Size the form to fit.
             ClientSize = new Size(
@@ -110,8 +138,8 @@ namespace Demo.Animation
         // Display the next image.
         private void tmrNextFrame_Tick(object sender, EventArgs e)
         {
-            FrameNum = ++FrameNum % Frames.Length;
-            picFrame.Image = Frames[FrameNum];
+            FrameNum = ++FrameNum % Frames.Count;
+            picFrame.Image = Frames[FrameNum].Bitmap;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -128,9 +156,9 @@ namespace Demo.Animation
                         IGroup group = timeline.AddVideoGroup(32, 320, 240);
 
                         ITrack videoTrack = group.AddTrack();
-                        for (int i = 0; i < Frames.Length; i++)
+                        for (int i = 0; i < Frames.Count; i++)
                         {
-                            videoTrack.AddImage(Frames[i], 0, 1);
+                            videoTrack.AddImage(Frames[i].Bitmap, 0, 1);
                         }
                         // add some audio
                         ITrack audioTrack = timeline.AddAudioGroup().AddTrack();
