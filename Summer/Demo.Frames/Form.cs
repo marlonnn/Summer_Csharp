@@ -112,16 +112,12 @@ namespace Demo.Frames
                     fps = mediaPlayer.getFramePerSecond();
                     duration = mediaPlayer.getDuration();
                     int i = videoFilesList.Count;
-                    mediaPlayer.LoadSnapShots();
-                    var v = mediaPlayer.segmentationImages;
+                    
+                    //mediaPlayer.LoadSnapShots();
+                    mediaPlayer.LoadSnap();
+                    //var v = mediaPlayer.segmentationImages;
 
-                    this.ReloadInfo();
-
-                    videoFilesList.Add(new VideoFiles(fileInfo.Name, fileInfo.FullName, 0, fps, duration));
-                    this.videoListView1.LoadBinItem(videoFilesList);
-
-                    //Bill SerGio: Dispose of DataSet
-                    //ds.Dispose();
+                    //this.ReloadInfo(fileInfo, fps, duration);
                 }
             }
             catch (COMException comex)
@@ -130,21 +126,15 @@ namespace Demo.Frames
             }
         }
 
-        public void ReloadInfo()
+        public void ReloadInfo(System.IO.FileInfo fileInfo, double fps, double duration)
         {
             this.snapShots1.Clear();
-            int i = 0;
-            PictureBox box;
-            //if (this.mediaManager.currentMedia != null)
-            {
-                List<Frames> list = mediaPlayer.segmentationImages;
-                ShowInfo();
-                //this.images = list;
-                //if (this.mediaManager.currentMedia.fileType == MediaPlayer.FileType.Video)
-                {
-                    this.snapShots1.LoadFrames(list);
-                }
-            }
+            List<Frames> list = mediaPlayer.segmentationImages;
+            ShowInfo();
+            this.snapShots1.LoadFrames(list);
+
+            videoFilesList.Add(new VideoFiles(fileInfo.Name, fileInfo.FullName, 0, fps, duration));
+            this.videoListView1.LoadBinItem(videoFilesList);
         }
 
         private void ShowInfo()

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using DirectShowLib;
 using DirectShowLib.DES;
 using Demo.Frames;
+using System.ComponentModel;
 
 namespace VideoEditor
 {
@@ -59,6 +60,9 @@ namespace VideoEditor
         private ManualResetEvent manualResetEvent = null;
         volatile private GraphState currentState = GraphState.Stopped;
         public event HotMediaEvent StopPlay;
+
+        private BackgroundWorker _loadFileTask;
+
         public void Dispose()
         {
             CloseInterfaces();
@@ -82,12 +86,70 @@ namespace VideoEditor
                 Thread t = new Thread(new ThreadStart(this.EventWait));
                 t.Name = "HotMediaEvent Thread";
                 t.Start();
+
+                _loadFileTask = new BackgroundWorker();
+                _loadFileTask.WorkerReportsProgress = true;
+                _loadFileTask.WorkerSupportsCancellation = true;
+                _loadFileTask.DoWork += SaveFramesTask_DoWork;
+                _loadFileTask.ProgressChanged += SaveFramesTask_ProgressChanged;
+                _loadFileTask.RunWorkerCompleted += SaveFramesTask_RunWorkerCompleted;
             }
             catch
             {
                 Dispose();
                 throw;
             }
+        }
+
+        public void LoadSnap()
+        {
+            if (!_loadFileTask.IsBusy)
+            {
+                _loadFileTask.RunWorkerAsync();
+            }
+        }
+
+        private void SaveFramesTask_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                double interval = 0;
+                double fps = 0;
+                double duration = 0;
+                fps = this.getFramePerSecond();
+                duration = this.getDuration();
+
+                interval = 1 / fps;
+                if (fileType == FileType.Video)
+                {
+                    Bitmap snapshot;
+                    for (double i = 0; i < duration; i = i + interval)
+                    {
+                        if (_loadFileTask.CancellationPending == true)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
+                        snapshot = this.SnapShot(i);
+                        this.segmentationImages.Add(new Frames(i, snapshot));
+                        _loadFileTask.ReportProgress((int)(100 * (i + 1) / this.segmentationImages.Count));
+                    }
+                }
+            }
+            catch (Exception ee)
+            {
+
+            }
+        }
+
+        private void SaveFramesTask_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            var v = e.ProgressPercentage;
+        }
+
+        private void SaveFramesTask_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var v = "";
         }
 
         public void LoadSnapShots()
@@ -98,11 +160,6 @@ namespace VideoEditor
             fps = this.getFramePerSecond();
             duration = this.getDuration();
 
-            //if (duration < 101)
-            //    interval = 1;
-
-            //if (duration > 100)
-            //    interval = duration / 100;
             interval = 1 / fps;
             List<Frames> list = new List<Frames>();
             if (fileType == FileType.Video)
