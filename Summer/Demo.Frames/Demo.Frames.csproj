@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,12 +58,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form.Designer.cs">
-      <DependentUpon>Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,15 +69,13 @@
     <Compile Include="ImageExtractor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoadPanel.cs">
+    <Compile Include="ProgressPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LoadPanel.Designer.cs">
-      <DependentUpon>LoadPanel.cs</DependentUpon>
+    <Compile Include="ProgressPanel.Designer.cs">
+      <DependentUpon>ProgressPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="MediaInfo - 复制.cs" />
     <Compile Include="MediaInfo.cs" />
-    <Compile Include="MediaPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SnapShots.cs">
@@ -98,14 +91,11 @@
     <Compile Include="VideoListView.Designer.cs">
       <DependentUpon>VideoListView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form.resx">
-      <DependentUpon>Form.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrameForm.resx">
       <DependentUpon>FrameForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoadPanel.resx">
-      <DependentUpon>LoadPanel.cs</DependentUpon>
+    <EmbeddedResource Include="ProgressPanel.resx">
+      <DependentUpon>ProgressPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -132,6 +122,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="软件使用简单说明.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

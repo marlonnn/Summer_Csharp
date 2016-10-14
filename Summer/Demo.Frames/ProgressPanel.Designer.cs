@@ -1,6 +1,6 @@
 ﻿namespace Demo.Frames
 {
-    partial class LoadPanel
+    partial class ProgressPanel
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,40 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.lblInfo = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.Location = new System.Drawing.Point(3, 2);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(273, 19);
+            this.lblInfo.TabIndex = 9;
+            this.lblInfo.Text = "正在加载......";
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(0, 24);
+            this.progressBar.Location = new System.Drawing.Point(1, 17);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(221, 23);
-            this.progressBar.TabIndex = 8;
+            this.progressBar.Size = new System.Drawing.Size(497, 16);
+            this.progressBar.TabIndex = 17;
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(3, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 19);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "正在加载......";
-            // 
-            // LoadPanel
+            // ProgressPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.label1);
-            this.Name = "LoadPanel";
-            this.Size = new System.Drawing.Size(227, 51);
+            this.Controls.Add(this.lblInfo);
+            this.Name = "ProgressPanel";
+            this.Size = new System.Drawing.Size(501, 35);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Label label1;
     }
 }

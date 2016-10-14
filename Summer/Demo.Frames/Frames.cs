@@ -13,6 +13,14 @@ namespace Demo.Frames
 
         private Image _image;
 
+        private string _name;
+
+        private int _frameName;
+        public int FrameName
+        {
+            get { return this._frameName; }
+        }
+
         public double Time
         {
             get { return this._time; }
@@ -23,10 +31,19 @@ namespace Demo.Frames
             get { return this._image; }
         }
 
-        public Frames(double time, Image image)
+        public Frames(double time, Image image, string name)
         {
             this._time = time;
             this._image = image;
+            this._name = name;
+            try
+            {
+                this._frameName = Int32.Parse(name);
+            }
+            catch (Exception e)
+            {
+                this._frameName = 0;
+            }
         }
     }
 }

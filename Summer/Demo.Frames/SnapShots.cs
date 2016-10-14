@@ -94,7 +94,7 @@ namespace Demo.Frames
                 }
 
                 Rectangle theRect = new Rectangle(_squareWidth * (startX++) + _margin, startY, _squareWidth, _squareHeight);
-                Rectangle textRect = new Rectangle(theRect.X + 100 , theRect.Y, 20, 20);
+                Rectangle textRect = new Rectangle(theRect.X + 90 , theRect.Y, 30, 20);
                 //Image imageBack = Image.FromFile(exePath + "/frame.gif");
                 //g.DrawImage(imageBack, theRect);
                 Rectangle textRectInnner = new Rectangle(theRect.X, theRect.Y, 120, 120);

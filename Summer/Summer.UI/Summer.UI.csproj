@@ -58,6 +58,12 @@
     <Compile Include="Forms\LogListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Line\BaseLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Line\BaseLine.Designer.cs">
+      <DependentUpon>BaseLine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Line\GraphicsExtensions.cs" />
     <Compile Include="Line\IShape.cs" />
     <Compile Include="Line\Line.cs">
@@ -81,6 +87,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Line\BaseLine.resx">
+      <DependentUpon>BaseLine.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Text\OrientedTextLabel.resx">
       <DependentUpon>OrientedTextLabel.cs</DependentUpon>
     </EmbeddedResource>

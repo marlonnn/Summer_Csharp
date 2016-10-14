@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -42,16 +43,78 @@ namespace Demo.Frames
         private const int WM_MOVE = 0x00000003;
         private const int EC_COMPLETE = 0x00000001;
 
-        enum State { Playing, Paused, Stopped };
-        State graphState;
+        public enum State { Playing, Paused, Stopped };
+        private State graphState;
 
-        private string fileName;           //used to save the movie file name 
-        private string storagePath;        //used for the path where we save files
-        private IMediaDet md;          //needed to extract pictures
-        private static int counter = 0;    //to generate different file names
-        private float interval = 1.0f;     //default time interval
+        private string _fileName;           //used to save the movie file name 
+        private string _storagePath;        //used for the path where we save files
 
         private GrabFrames _grabFrames;
+        public delegate void ReportProgress(double progress);
+
+        private BackgroundWorker _saveFramesTask;
+
+        // The index of the current frame.
+        private int FrameNum = 0;
+
+        private void InitilizeTask()
+        {
+            _saveFramesTask = new BackgroundWorker();
+            _saveFramesTask.WorkerReportsProgress = true;
+            _saveFramesTask.WorkerSupportsCancellation = true;
+            _saveFramesTask.DoWork += SaveFramesTask_DoWork;
+            _saveFramesTask.ProgressChanged += SaveFramesTask_ProgressChanged;
+            _saveFramesTask.RunWorkerCompleted += SaveFramesTask_RunWorkerCompleted;
+        }
+
+        private void SaveFramesTask_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (_grabFrames != null)
+            {
+                if (_grabFrames.Frames != null && _grabFrames.Frames.Count > 0)
+                {
+                    for (int i = 0; i <= _grabFrames.Frames.Count; i++)
+                    {
+                        if (_saveFramesTask.CancellationPending == true)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
+                        try
+                        {
+                            using (Bitmap bitmap = new Bitmap(_grabFrames.Frames[i].Image))
+                            {
+                                bitmap.Save(string.Format("{0}\\{1}.png", _storagePath, i));
+                            }
+                        }
+                        catch (Exception ee)
+                        {
+                        }
+                        _saveFramesTask.ReportProgress(100 * (i + 1) / _grabFrames.Frames.Count);
+                    }
+                }
+            }
+
+        }
+
+        private void SaveFramesTask_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.progressPanel1.ProgressBar.Value = e.ProgressPercentage;
+            this.progressPanel1.ProgressBar.Value = e.ProgressPercentage;
+        }
+
+        private void SaveFramesTask_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.progressPanel1.ProgressBar.Value = 100;
+            //this.progressPanel1.ProgressBar.Visible = false;
+            this.progressPanel1.IsVisible(false);
+            if (e.Cancelled)
+            {
+                return;
+            }
+            MessageBox.Show("成功导出全部帧图！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void PerformSave()
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -59,9 +122,53 @@ namespace Demo.Frames
                 dialog.Description = "请选择将要保存帧图的文件路径";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    storagePath = dialog.SelectedPath;
-                    _grabFrames = new GrabFrames(fileName, storagePath);
+                    if (_fileName != null)
+                    {
+                        _storagePath = dialog.SelectedPath;
+                        SaveFrames();
+                    }
+                    else
+                    {
+                        //to do
+                    }
+
                 }
+            }
+        }
+
+        private void SaveFrames()
+        {
+            if (!_saveFramesTask.IsBusy)
+            {
+                this.progressPanel1.LabelInfo.Text = "正在保存帧图，请稍等......";
+                this.progressPanel1.ProgressBar.Value = 0;
+                this.progressPanel1.IsVisible(true);
+                _saveFramesTask.RunWorkerAsync();
+            }
+        }
+
+        private void ReportProgressHandler(double progress)
+        {
+            if (this.progressPanel1.ProgressBar.InvokeRequired)
+            {
+                ReportProgress d = new ReportProgress(ReportProgressHandler);
+                this.progressPanel1.ProgressBar.Invoke(d, new object[] { progress });
+            }
+            else
+            {
+                int value = (int)(100 * (progress + 1) / this._grabFrames.MediaInfo.Duration);
+                if (value >= 100)
+                {
+                    value = 100;
+                    this.progressPanel1.IsVisible(false);
+                    this.snapShots.LoadFrames(_grabFrames.Frames);
+                    this.btnSave.Enabled = true;
+                    this.btnVideoPlay.Enabled = true;
+                    this.btnVideoStop.Enabled = true;
+                    this.btnVideoSave.Enabled = true;
+                    InitilizeFps();
+                }
+                this.progressPanel1.ProgressBar.Value = value;
             }
         }
 
@@ -77,6 +184,12 @@ namespace Demo.Frames
             movieFiles.SelectedIndexChanged += new EventHandler(sicListBox);
             movieDir = "";
             statusBar1.Panels[0].Text = "Duration: 00m:00s";
+            this.progressPanel1.IsVisible(false);
+            this.btnSave.Enabled = false;
+            this.btnVideoPlay.Enabled = false;
+            this.btnVideoStop.Enabled = false;
+            this.btnVideoSave.Enabled = false;
+            InitilizeTask();
         }
 
         // 
@@ -211,10 +324,12 @@ namespace Demo.Frames
                 seconds = (int)duration % 60;
                 statusBar1.Panels[0].Text = "Duration: " + minutes.ToString("D2")
                     + ":m" + seconds.ToString("D2") + ":s";
-                graphState = State.Paused;
-                //this.buttonPlay.Text = "Pause";
-                ////start the playback
-                //mediaCtrl.Run();
+                graphState = State.Playing;
+
+                this.buttonPlay.Text = "Pause";
+                //start the playback
+                mediaCtrl.Run();
+
             }
             catch (Exception) { Text = "Error loading file"; }
         }
@@ -230,7 +345,20 @@ namespace Demo.Frames
                 CloseInterfaces();
                 InitInterfaces();
                 LoadFile(movieDir + movieFiles.Text);
-                fileName = movieDir + movieFiles.Text;
+                _fileName = movieDir + movieFiles.Text;
+                _grabFrames = new GrabFrames(_fileName);
+                if (_grabFrames != null)
+                {
+                    tmrNextFrame.Enabled = false;
+                    this.btnSave.Enabled = false;
+                    this.btnVideoPlay.Enabled = false;
+                    this.btnVideoStop.Enabled = false;
+                    this.btnVideoSave.Enabled = false;
+                    this.progressPanel1.ProgressBar.Value = 0;
+                    this.progressPanel1.LabelInfo.Text = "正在加载帧图，请稍等......";
+                    this.progressPanel1.IsVisible(true);
+                    _grabFrames.ReportProgressHandler += ReportProgressHandler;
+                }
             }
             catch (Exception ex)
             {
@@ -422,6 +550,15 @@ namespace Demo.Frames
             PerformSave();
         }
 
+        private void MovieFiles_MouseClick(object sender, MouseEventArgs e)
+        {
+            int index = movieFiles.IndexFromPoint(e.X, e.Y);
+            movieFiles.SelectedIndex = index;
+            if (movieFiles.SelectedIndex != -1)
+            {
+            }
+        }
+
         private void buttonFramestep_Click(object sender, System.EventArgs e)
         {
             if (frameStep != null)
@@ -430,6 +567,86 @@ namespace Demo.Frames
                 graphState = State.Paused;
                 frameStep.Step(1, null);
             }
+        }
+
+        private void btnVideoPlay_Click(object sender, EventArgs e)
+        {
+            tmrNextFrame.Enabled = true;
+        }
+
+        private void btnVideoStop_Click(object sender, EventArgs e)
+        {
+            tmrNextFrame.Enabled = false;
+        }
+
+        private void btnVideoSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tmrNextFrame_Tick(object sender, EventArgs e)
+        {
+            if (this._grabFrames != null && _grabFrames.Frames != null)
+            {
+                FrameNum = ++FrameNum % _grabFrames.Frames.Count;
+                picFrame.Image = _grabFrames.Frames[FrameNum].Image;
+            }
+        }
+
+        private void hscrFps_Scroll(object sender, ScrollEventArgs e)
+        {
+            tmrNextFrame.Interval = 1000 / hScrollBar.Value;
+            lblFps.Text = hScrollBar.Value.ToString();
+        }
+
+        private void InitilizeFps()
+        {
+            if (this._grabFrames != null && this._grabFrames.MediaInfo != null)
+            {
+                tmrNextFrame.Interval = (int)(1000 / _grabFrames.MediaInfo.FPS);
+                lblFps.Text = _grabFrames.MediaInfo.FPS.ToString();
+            }
+        }
+
+        private void LoadFrames()
+        {
+            //string[] filter = new string[] { ".png" };
+            //FileInfo[] fileInfos = GetFileInfo(_storagePath, filter);
+
+            //Frames = new List<Frame>();
+            //for (int i = 0; i < fileInfos.Length; i++)
+            //{
+            //    string fileName = System.IO.Path.GetFileNameWithoutExtension(fileInfos[i].FullName);
+            //    Frame frame = new Frame(new Bitmap(fileInfos[i].FullName), fileName);
+            //    Frames.Add(frame);
+            //}
+            //Frames.Sort((f1, f2) => f1.FrameName.CompareTo(f2.FrameName));
+            //// Display the first frame.
+            //picFrame.Image = Frames[FrameNum].Bitmap;
+
+        }
+
+        private FileInfo[] GetFileInfo(string fileFolder, string[] filter)
+        {
+            DirectoryInfo folder = new DirectoryInfo(fileFolder);
+            try
+            {
+                FileInfo[] files;
+                files = folder.GetFiles().Where(f => filter.Contains(f.Extension.ToLower())).ToArray();
+                //Array.Sort(files, (f1, f2) => { return f1.Name.CompareTo(f2.Name); });
+                SortAsFolderName(ref files);
+                return files;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+            }
+        }
+
+        private void SortAsFolderName(ref FileInfo[] dirs)
+        {
+            Array.Sort(dirs, delegate (FileInfo x, FileInfo y) { return x.FullName.CompareTo(y.FullName); });
         }
     }
 }

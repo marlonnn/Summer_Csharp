@@ -46,11 +46,26 @@
             this.movieFiles = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.groupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.picFrame = new System.Windows.Forms.PictureBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnVideoSave = new System.Windows.Forms.Button();
+            this.btnVideoStop = new System.Windows.Forms.Button();
+            this.btnVideoPlay = new System.Windows.Forms.Button();
+            this.lblFps = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.hScrollBar = new System.Windows.Forms.HScrollBar();
+            this.tmrNextFrame = new System.Windows.Forms.Timer(this.components);
+            this.progressPanel1 = new Demo.Frames.ProgressPanel();
             this.snapShots = new Demo.Frames.SnapShots();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picFrame)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusBarPanel1
@@ -64,9 +79,9 @@
             // 
             this.buttonGraphEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonGraphEdit.Location = new System.Drawing.Point(420, 448);
+            this.buttonGraphEdit.Location = new System.Drawing.Point(392, 461);
             this.buttonGraphEdit.Name = "buttonGraphEdit";
-            this.buttonGraphEdit.Size = new System.Drawing.Size(85, 23);
+            this.buttonGraphEdit.Size = new System.Drawing.Size(75, 23);
             this.buttonGraphEdit.TabIndex = 12;
             this.buttonGraphEdit.Text = "GraphEdit";
             this.buttonGraphEdit.Click += new System.EventHandler(this.buttonGraphEdit_Click);
@@ -134,19 +149,19 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(126, 452);
+            this.textBox1.Location = new System.Drawing.Point(124, 464);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(194, 20);
+            this.textBox1.Size = new System.Drawing.Size(168, 20);
             this.textBox1.TabIndex = 10;
             // 
             // buttonSetmedia
             // 
             this.buttonSetmedia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetmedia.Location = new System.Drawing.Point(8, 448);
+            this.buttonSetmedia.Location = new System.Drawing.Point(6, 460);
             this.buttonSetmedia.Name = "buttonSetmedia";
-            this.buttonSetmedia.Size = new System.Drawing.Size(110, 23);
+            this.buttonSetmedia.Size = new System.Drawing.Size(112, 23);
             this.buttonSetmedia.TabIndex = 9;
             this.buttonSetmedia.Text = "Set media directory";
             this.buttonSetmedia.Click += new System.EventHandler(this.buttonSetmedia_Click);
@@ -162,18 +177,20 @@
             // 
             // statusBar1
             // 
-            this.statusBar1.Location = new System.Drawing.Point(0, 694);
+            this.statusBar1.Dock = System.Windows.Forms.DockStyle.None;
+            this.statusBar1.Location = new System.Drawing.Point(3, 683);
             this.statusBar1.Name = "statusBar1";
             this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.statusBarPanel1});
             this.statusBar1.ShowPanels = true;
-            this.statusBar1.Size = new System.Drawing.Size(1283, 22);
+            this.statusBar1.Size = new System.Drawing.Size(500, 22);
             this.statusBar1.SizingGrip = false;
             this.statusBar1.TabIndex = 13;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(128, 94);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(126, 106);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(341, 331);
             this.panel1.TabIndex = 11;
@@ -181,14 +198,14 @@
             // movieFiles
             // 
             this.movieFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.movieFiles.Location = new System.Drawing.Point(8, 96);
+            this.movieFiles.Location = new System.Drawing.Point(6, 108);
             this.movieFiles.Name = "movieFiles";
             this.movieFiles.Size = new System.Drawing.Size(110, 329);
             this.movieFiles.TabIndex = 8;
+            this.movieFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MovieFiles_MouseClick);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.progressBar1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.trackBar1);
             this.groupBox1.Controls.Add(this.buttonLoop);
@@ -196,7 +213,7 @@
             this.groupBox1.Controls.Add(this.buttonFramestep);
             this.groupBox1.Controls.Add(this.buttonStop);
             this.groupBox1.Controls.Add(this.buttonPlay);
-            this.groupBox1.Location = new System.Drawing.Point(8, 0);
+            this.groupBox1.Location = new System.Drawing.Point(6, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(500, 88);
             this.groupBox1.TabIndex = 7;
@@ -204,7 +221,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(326, 448);
+            this.btnSave.Location = new System.Drawing.Point(298, 461);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(88, 25);
             this.btnSave.TabIndex = 14;
@@ -212,19 +229,132 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // progressBar1
+            // groupBox
             // 
-            this.progressBar1.Location = new System.Drawing.Point(120, 68);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(368, 16);
-            this.progressBar1.TabIndex = 15;
+            this.groupBox.Controls.Add(this.progressPanel1);
+            this.groupBox.Controls.Add(this.groupBox1);
+            this.groupBox.Controls.Add(this.movieFiles);
+            this.groupBox.Controls.Add(this.snapShots);
+            this.groupBox.Controls.Add(this.panel1);
+            this.groupBox.Controls.Add(this.btnSave);
+            this.groupBox.Controls.Add(this.statusBar1);
+            this.groupBox.Controls.Add(this.buttonGraphEdit);
+            this.groupBox.Controls.Add(this.buttonSetmedia);
+            this.groupBox.Controls.Add(this.textBox1);
+            this.groupBox.Location = new System.Drawing.Point(3, 2);
+            this.groupBox.Name = "groupBox";
+            this.groupBox.Size = new System.Drawing.Size(511, 711);
+            this.groupBox.TabIndex = 18;
+            this.groupBox.TabStop = false;
+            this.groupBox.Text = "Video-Frame";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.picFrame);
+            this.groupBox2.Controls.Add(this.groupBox3);
+            this.groupBox2.Location = new System.Drawing.Point(520, 2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(514, 711);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Frame-Video";
+            // 
+            // picFrame
+            // 
+            this.picFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picFrame.Location = new System.Drawing.Point(6, 108);
+            this.picFrame.Name = "picFrame";
+            this.picFrame.Size = new System.Drawing.Size(500, 600);
+            this.picFrame.TabIndex = 1;
+            this.picFrame.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnVideoSave);
+            this.groupBox3.Controls.Add(this.btnVideoStop);
+            this.groupBox3.Controls.Add(this.btnVideoPlay);
+            this.groupBox3.Controls.Add(this.lblFps);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.hScrollBar);
+            this.groupBox3.Location = new System.Drawing.Point(6, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(500, 88);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            // 
+            // btnVideoSave
+            // 
+            this.btnVideoSave.Location = new System.Drawing.Point(229, 10);
+            this.btnVideoSave.Name = "btnVideoSave";
+            this.btnVideoSave.Size = new System.Drawing.Size(88, 24);
+            this.btnVideoSave.TabIndex = 5;
+            this.btnVideoSave.Text = "Save Video";
+            this.btnVideoSave.Click += new System.EventHandler(this.btnVideoSave_Click);
+            // 
+            // btnVideoStop
+            // 
+            this.btnVideoStop.Location = new System.Drawing.Point(116, 10);
+            this.btnVideoStop.Name = "btnVideoStop";
+            this.btnVideoStop.Size = new System.Drawing.Size(88, 24);
+            this.btnVideoStop.TabIndex = 4;
+            this.btnVideoStop.Text = "Stop";
+            this.btnVideoStop.Click += new System.EventHandler(this.btnVideoStop_Click);
+            // 
+            // btnVideoPlay
+            // 
+            this.btnVideoPlay.Location = new System.Drawing.Point(6, 10);
+            this.btnVideoPlay.Name = "btnVideoPlay";
+            this.btnVideoPlay.Size = new System.Drawing.Size(88, 24);
+            this.btnVideoPlay.TabIndex = 3;
+            this.btnVideoPlay.Text = "Play";
+            this.btnVideoPlay.Click += new System.EventHandler(this.btnVideoPlay_Click);
+            // 
+            // lblFps
+            // 
+            this.lblFps.AutoSize = true;
+            this.lblFps.Location = new System.Drawing.Point(467, 44);
+            this.lblFps.Name = "lblFps";
+            this.lblFps.Size = new System.Drawing.Size(13, 13);
+            this.lblFps.TabIndex = 2;
+            this.lblFps.Text = "5";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "FPS:";
+            // 
+            // hScrollBar
+            // 
+            this.hScrollBar.Location = new System.Drawing.Point(40, 42);
+            this.hScrollBar.Maximum = 200;
+            this.hScrollBar.Minimum = 1;
+            this.hScrollBar.Name = "hScrollBar";
+            this.hScrollBar.Size = new System.Drawing.Size(424, 17);
+            this.hScrollBar.TabIndex = 0;
+            this.hScrollBar.Value = 5;
+            this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hscrFps_Scroll);
+            // 
+            // tmrNextFrame
+            // 
+            this.tmrNextFrame.Tick += new System.EventHandler(this.tmrNextFrame_Tick);
+            // 
+            // progressPanel1
+            // 
+            this.progressPanel1.Location = new System.Drawing.Point(6, 491);
+            this.progressPanel1.Name = "progressPanel1";
+            this.progressPanel1.Size = new System.Drawing.Size(501, 35);
+            this.progressPanel1.TabIndex = 16;
             // 
             // snapShots
             // 
             this.snapShots.AutoScroll = true;
             this.snapShots.BackColor = System.Drawing.Color.LightGray;
             this.snapShots.HorizontalMode = true;
-            this.snapShots.Location = new System.Drawing.Point(8, 492);
+            this.snapShots.Location = new System.Drawing.Point(6, 531);
             this.snapShots.Name = "snapShots";
             this.snapShots.Size = new System.Drawing.Size(500, 148);
             this.snapShots.TabIndex = 15;
@@ -234,23 +364,22 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1283, 716);
-            this.Controls.Add(this.snapShots);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.buttonGraphEdit);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.buttonSetmedia);
-            this.Controls.Add(this.statusBar1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.movieFiles);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1045, 716);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox);
+            this.MaximizeBox = false;
             this.Name = "FrameForm";
             this.Text = "FrameForm";
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox.ResumeLayout(false);
+            this.groupBox.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picFrame)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -273,7 +402,18 @@
         private System.Windows.Forms.ListBox movieFiles;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private SnapShots snapShots;
+        private System.Windows.Forms.GroupBox groupBox;
+        private ProgressPanel progressPanel1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.HScrollBar hScrollBar;
+        private System.Windows.Forms.Label lblFps;
+        private System.Windows.Forms.Button btnVideoPlay;
+        private System.Windows.Forms.Button btnVideoSave;
+        private System.Windows.Forms.Button btnVideoStop;
+        private System.Windows.Forms.Timer tmrNextFrame;
+        private System.Windows.Forms.PictureBox picFrame;
     }
 }
