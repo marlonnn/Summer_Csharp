@@ -212,7 +212,7 @@ namespace Summer.UI.Button
         /// <summary>
         /// invalidate to change button specified region background color when states changed.
         /// </summary>
-        private void RegionInvalidate()
+        protected void RegionInvalidate()
         {
             if (_region == null)
             {
