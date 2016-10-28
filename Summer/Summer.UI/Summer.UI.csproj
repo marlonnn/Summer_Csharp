@@ -82,6 +82,12 @@
     <Compile Include="Text\OrientedTextLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Track\ColorHelper.cs" />
+    <Compile Include="Track\DrawMACStyleHelper.cs" />
+    <Compile Include="Track\MACTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Track\MACTrackBarDesigner.cs" />
     <Compile Include="TranspControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,8 +108,13 @@
     <EmbeddedResource Include="Text\OrientedTextLabel.resx">
       <DependentUpon>OrientedTextLabel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Track\MACTrackBar.resx">
+      <DependentUpon>MACTrackBar.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Track\MACTrackBar.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
