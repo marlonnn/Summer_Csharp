@@ -181,5 +181,21 @@ namespace Summer.System.Data
                 throw e1;
             }
         }
+
+        public IList<T> FindAll(string sql)
+        {
+            try
+            {
+                IList<T> list = adoTmplte.QueryWithRowMapper(CommandType.Text, sql, rowMapper);
+                return list;
+            }
+            catch (Exception e)
+            {
+                Exception inner = e.InnerException ?? e;
+                var e1 = new DatabaseException(inner.Message, e.InnerException);
+                throw e1;
+            }
+
+        }
     }
 }

@@ -19,7 +19,8 @@ namespace Demo.DB
                 Application.SetCompatibleTextRenderingDefault(false);
                 //Application.Run(new Form1());
 
-                var v = SpringHelper.GetObject<MainADO>("mainADO");
+                var form1 = SpringHelper.GetObject<Form1>("form1");
+                Application.Run(form1);
             }
             catch (Exception ee)
             {
