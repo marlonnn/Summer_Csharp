@@ -24,9 +24,10 @@ namespace Summer.System.Util
 				RegistryKey hklm = Microsoft.Win32.Registry.LocalMachine;
 				tcmsKey = hklm.OpenSubKey ( RootPath, writable ) ??
 									 hklm.CreateSubKey ( RootPath );
-			} catch ( Exception e )
+			} catch ( Exception e)
 			{
 				tcmsKey = null;
+                throw e;
 			}
 			return tcmsKey;
 		}
@@ -58,7 +59,7 @@ namespace Summer.System.Util
 					try
 					{
 						value = tcmsKey.GetValue ( name );
-					} catch ( Exception e )
+					} catch ( Exception)
 					{
 						value = "";
 					}
@@ -77,7 +78,7 @@ namespace Summer.System.Util
 				{
 					if ( tcmsKey != null )
 						tcmsKey.SetValue ( name, value );
-				} catch ( Exception e )
+				} catch ( Exception )
 				{
 					rst = false;
 				}

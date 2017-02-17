@@ -7,8 +7,8 @@ namespace Summer.System.Util.StreamCreator
 {
 	class MessageContent
 	{
-		public string FullName;
-		public string OccursIndex;
-		public string RawValue;
+		public string FullName = null;
+		public string OccursIndex = null;
+		public string RawValue = null;
 	}
 }

@@ -40,7 +40,7 @@ namespace Summer.System.Log
                 //优先尝试从EXE所在目录查找配置文件
                 finfo = new FileInfo(path + FileName);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 finfo = null;
             }
@@ -54,7 +54,7 @@ namespace Summer.System.Log
                     finfo = new FileInfo(path + FileName);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 finfo = null;
             }
@@ -67,7 +67,7 @@ namespace Summer.System.Log
                     finfo = new FileInfo("." + FileName);
                 }
             }
-            catch (Exception ee)
+            catch (Exception)
             {
                 finfo = null;
             }
@@ -130,7 +130,7 @@ namespace Summer.System.Log
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

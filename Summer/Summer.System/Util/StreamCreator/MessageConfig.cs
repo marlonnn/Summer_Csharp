@@ -8,7 +8,7 @@ namespace Summer.System.Util.StreamCreator
 		private readonly Dictionary<string, string> fullname_rawvalue_mapping = new Dictionary<string, string> ( );
 		private readonly ValueConvertor convertor = new ValueConvertor ( );
 
-		public bool IsBigEndien;
+		public bool IsBigEndien = false;
 
 		public List<bool> GetBits ( ProtocalTerm p_term )
 		{

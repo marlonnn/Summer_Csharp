@@ -17,7 +17,7 @@ namespace Summer.System.Log
 			try
 			{
 				finfo = new FileInfo ( cfgPath );
-			} catch ( Exception e )
+			} catch ( Exception )
 			{
 				finfo = null;
 			}
@@ -28,7 +28,7 @@ namespace Summer.System.Log
 					//配置文件修改后会立即生效，无需重启应用
 					XmlConfigurator.ConfigureAndWatch ( finfo );
 					
-				} catch ( Exception ee )
+				} catch ( Exception )
 				{
 					//如果没有找到此文件，系统默认使用控制台方式输出
 					BasicConfigurator.Configure ( );

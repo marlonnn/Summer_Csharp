@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Summer.System.Log;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Summer.System.NET.Pump
 			{
 				//连接失败
 				CanUseConnect = false;
+                LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
 			}
 			CanUseConnect = true;
 		}
@@ -48,7 +50,8 @@ namespace Summer.System.NET.Pump
 			} catch ( Exception e )
 			{
 				CanUseConnect = false;
-			}
+                LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
+            }
 			;
 		}
 
@@ -69,8 +72,8 @@ namespace Summer.System.NET.Pump
 							Receive ( );
 						} catch ( SocketException e )
 						{
-							//一般来说中断/关闭监听,会引发此异常
-							;
+                            //一般来说中断/关闭监听,会引发此异常
+                            LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
 						}
 					}
 					);
@@ -101,8 +104,9 @@ namespace Summer.System.NET.Pump
 					//ns.Read ( bytes, 0, len );
 				} catch ( Exception e )
 				{
-					//关闭自身client引发异常，关闭远端server
-					break;
+                    //关闭自身client引发异常，关闭远端server
+                    LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
+                    break;
 				}
 
 				if ( DataReceived != null )
@@ -137,7 +141,8 @@ namespace Summer.System.NET.Pump
 				}
 				catch (Exception e)
 				{
-					;
+                    LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
+                    ;
 				}
 
 			//if ( IsOpened && ns != null )

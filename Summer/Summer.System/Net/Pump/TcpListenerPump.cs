@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Summer.System.Log;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -37,7 +38,8 @@ namespace Summer.System.NET.Pump
 					Receive ( );
 				} catch (SocketException e )
 				{//一般来说中断/关闭监听,会引发此异常
-					;
+                    LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
+                    ;
 				}
 			}
 				);
@@ -60,8 +62,9 @@ namespace Summer.System.NET.Pump
 					rr = ns.Read ( bytes, 0, len );
 				} catch ( Exception e )
 				{
-					//关闭自身client引发异常
-					break;
+                    //关闭自身client引发异常
+                    LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
+                    break;
 				}
 				if ( rr == 0 )
 				{
@@ -82,7 +85,8 @@ namespace Summer.System.NET.Pump
 				ns.Write ( bytes, 0, bytes.Length );
 			} catch ( Exception e )
 			{
-				;
+                LogHelper.GetLogger<TcpClientPp>().Debug(e.StackTrace);
+                ;
 			}
 		}
 

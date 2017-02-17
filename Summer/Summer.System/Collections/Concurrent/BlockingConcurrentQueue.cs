@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Summer.System.Log;
+using System;
 using System.Collections.Concurrent;
 using System.Threading;
 
@@ -38,6 +39,7 @@ namespace Summer.System.Collections.Concurrent
 			} catch ( OperationCanceledException e )
 			{
 				rr = false;
+                LogHelper.GetLogger<BlockingConcurrentQueue<T>>().Error(e.StackTrace);
 			}
 			return rr;
 		}

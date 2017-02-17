@@ -54,7 +54,7 @@ namespace Summer.System.Util.StreamAnalyser.Message
                 InterpreterPosition pos = new InterpreterPosition();
                 mt = ptc.Interpret(message, ref pos, new InterpretOpion());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -91,7 +91,7 @@ namespace Summer.System.Util.StreamAnalyser.Message
                 }
                 mt = ProtocalTerm.CreateMessageTerm(ptc, new TermValue(""), mtList);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -115,7 +115,7 @@ namespace Summer.System.Util.StreamAnalyser.Message
             {
                 mt = ptc.Transfer(xmlVisitor) ;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -134,7 +134,7 @@ namespace Summer.System.Util.StreamAnalyser.Message
             {
                 mt = pt.CreateBlank(ingoreoccurs);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -168,7 +168,7 @@ namespace Summer.System.Util.StreamAnalyser.Message
             {
                 mt = pt.CreateTerm(valuelist, new InterpretOpion());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
